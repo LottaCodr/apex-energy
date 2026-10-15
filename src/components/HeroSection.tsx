@@ -4,7 +4,6 @@ import {
   ArrowRight,
   Calculator,
   Check,
-  PhoneCall,
 } from 'lucide-react'
 import { COMPANY_INFO, TRUST_BENCHMARKS } from '../data/energyData'
 import {
