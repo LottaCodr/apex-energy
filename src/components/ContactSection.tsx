@@ -43,9 +43,9 @@ export const ContactSection: React.FC = () => {
   return (
     <section
       id="contact"
-      className="py-20 lg:py-28 bg-[#F8FAFC] border-b border-[#E2E8F0]"
+      className="border-b border-[#E2E8F0] bg-[#F8FAFC] py-14 sm:py-16 lg:py-28"
     >
-      <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8 space-y-12">
+      <div className="mx-auto max-w-[1320px] space-y-10 px-4 sm:space-y-12 sm:px-6 lg:px-8">
         {/* Swiss Editorial Section Header */}
         <motion.div
           variants={fadeUpVariant}
@@ -81,7 +81,7 @@ export const ContactSection: React.FC = () => {
             viewport={{ once: true, margin: '-50px' }}
             className="lg:col-span-5"
           >
-            <div className="rounded-2xl border border-slate-800 bg-[#0B131E] p-7 sm:p-8 text-white space-y-6">
+            <div className="space-y-6 rounded-2xl border border-slate-800 bg-[#0B131E] p-5 text-white sm:p-8">
               <div>
                 <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-[#34D399]">
                   CORPORATE &amp; ENGINEERING DESK
@@ -95,7 +95,8 @@ export const ContactSection: React.FC = () => {
               <div className="rounded-xl border border-slate-800 bg-slate-900/90 p-4 space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-[10px] uppercase tracking-wider text-slate-400">
-                    DIRECT TELEPHONE &amp; DISPATCH
+                    <span className="sm:hidden">PHONE &amp; DISPATCH</span>
+                    <span className="hidden sm:inline">DIRECT TELEPHONE &amp; DISPATCH</span>
                   </span>
                   <button
                     type="button"
@@ -117,7 +118,7 @@ export const ContactSection: React.FC = () => {
                 </div>
                 <a
                   href={COMPANY_INFO.phoneHref}
-                  className="flex items-center gap-3 font-mono text-xl sm:text-2xl font-bold text-white hover:text-[#34D399] transition-colors tabular-nums"
+                  className="flex min-w-0 items-center gap-2.5 font-mono text-base font-bold text-white transition-colors hover:text-[#34D399] min-[380px]:text-lg sm:gap-3 sm:text-2xl tabular-nums"
                 >
                   <Phone className="h-5 w-5 text-[#10B981] shrink-0" />
                   <span>{COMPANY_INFO.phoneDisplay}</span>
@@ -204,7 +205,7 @@ export const ContactSection: React.FC = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-50px' }}
-            className="lg:col-span-7 rounded-2xl border border-[#E2E8F0] bg-white p-7 sm:p-10"
+            className="rounded-2xl border border-[#E2E8F0] bg-white p-5 sm:p-8 lg:col-span-7 lg:p-10"
           >
             <AnimatePresence mode="wait">
               {submittedRef ? (
@@ -234,21 +235,21 @@ export const ContactSection: React.FC = () => {
                   </div>
 
                   <div className="mx-auto max-w-md rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] p-4 text-left space-y-2 font-mono text-xs">
-                    <div className="flex justify-between">
+                    <div className="flex flex-col gap-1 min-[420px]:flex-row min-[420px]:justify-between">
                       <span className="text-[#475569]">Reference ID:</span>
                       <span className="font-bold text-[#0F172A]">{submittedRef}</span>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex flex-col gap-1 min-[420px]:flex-row min-[420px]:justify-between">
                       <span className="text-[#475569]">Est. Volume:</span>
                       <span className="font-bold text-[#059669]">{monthlyVolume}</span>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex flex-col gap-1 min-[420px]:flex-row min-[420px]:justify-between">
                       <span className="text-[#475569]">Direct Desk:</span>
                       <span className="font-bold text-[#0F172A]">
                         {COMPANY_INFO.phoneDisplay}
                       </span>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex flex-col gap-1 min-[420px]:flex-row min-[420px]:justify-between">
                       <span className="text-[#475569]">Email Desk:</span>
                       <span className="font-bold text-[#0284C7]">
                         {COMPANY_INFO.emailDisplay}
@@ -256,7 +257,7 @@ export const ContactSection: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+                  <div className="flex flex-col items-stretch justify-center gap-3 pt-2 sm:flex-row sm:flex-wrap sm:items-center [&>*]:w-full sm:[&>*]:w-auto">
                     <Button asChild>
                       <a
                         href={`mailto:${COMPANY_INFO.emailDisplay}?subject=${encodeURIComponent(
@@ -266,7 +267,8 @@ export const ContactSection: React.FC = () => {
                         )}`}
                       >
                         <Mail className="h-4 w-4" />
-                        <span>Send Copy via Email Client</span>
+                        <span className="sm:hidden">Email a Copy</span>
+                        <span className="hidden sm:inline">Send Copy via Email Client</span>
                       </a>
                     </Button>
                     <Button
@@ -311,6 +313,7 @@ export const ContactSection: React.FC = () => {
                       <input
                         type="text"
                         required
+                        autoComplete="name"
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
                         placeholder="Engr. Adebayo Musa"
@@ -325,6 +328,7 @@ export const ContactSection: React.FC = () => {
                       <input
                         type="text"
                         required
+                        autoComplete="organization"
                         value={companyName}
                         onChange={(e) => setCompanyName(e.target.value)}
                         placeholder="Continental Manufacturing PLC"
@@ -339,6 +343,8 @@ export const ContactSection: React.FC = () => {
                       <input
                         type="email"
                         required
+                        autoComplete="email"
+                        inputMode="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="procurement@company.com.ng"
@@ -353,6 +359,8 @@ export const ContactSection: React.FC = () => {
                       <input
                         type="tel"
                         required
+                        autoComplete="tel"
+                        inputMode="tel"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         placeholder="+234 803 000 0000"
@@ -366,6 +374,7 @@ export const ContactSection: React.FC = () => {
                       </label>
                       <input
                         type="text"
+                        autoComplete="address-level1"
                         value={location}
                         onChange={(e) => setLocation(e.target.value)}
                         placeholder="e.g. Abuja, Lagos, Ogun, Port Harcourt, Kano"
@@ -462,7 +471,8 @@ export const ContactSection: React.FC = () => {
 
                     <Button type="submit" size="lg">
                       <Send className="h-4 w-4" />
-                      <span>Submit Supply Inquiry</span>
+                      <span className="sm:hidden">Submit Inquiry</span>
+                      <span className="hidden sm:inline">Submit Supply Inquiry</span>
                     </Button>
                   </div>
                 </motion.form>

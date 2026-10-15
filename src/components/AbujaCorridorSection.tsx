@@ -27,11 +27,11 @@ export const AbujaCorridorSection: React.FC<AbujaCorridorSectionProps> = ({
   return (
     <section
       id="network"
-      className="py-20 lg:py-28 border-b border-[#E2E8F0] bg-[#F8FAFC]"
+      className="border-b border-[#E2E8F0] bg-[#F8FAFC] py-14 sm:py-16 lg:py-28"
     >
-      <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8 space-y-24">
+      <div className="mx-auto max-w-[1320px] space-y-16 px-4 sm:px-6 lg:space-y-24 lg:px-8">
         {/* 04 / Nationwide Supply Corridors */}
-        <div className="space-y-10">
+        <div className="space-y-8 sm:space-y-10">
           <motion.div
             variants={fadeUpVariant}
             initial="hidden"
@@ -66,19 +66,21 @@ export const AbujaCorridorSection: React.FC<AbujaCorridorSectionProps> = ({
                   transition={{ duration: 0.6, ease: EASE_OUT_EXPO }}
                   src="/images/cryo-lng-plant.jpg"
                   alt="Apex Energy Cryogenic LNG Regasification Silos and Road Tanker"
+                  loading="lazy"
+                  decoding="async"
                   className="h-full w-full object-cover object-center"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0B131E]/85 via-transparent to-transparent" />
-                <div className="absolute bottom-4 left-5 right-5 flex items-end justify-between text-white">
+                <div className="absolute inset-x-4 bottom-3 flex items-end justify-between gap-3 text-white sm:inset-x-5 sm:bottom-4">
                   <div>
                     <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#7DD3FC]">
                       LONG-HAUL BULK CORRIDORS
                     </p>
-                    <p className="font-display text-lg font-bold">
+                    <p className="font-display text-base font-bold leading-snug sm:text-lg">
                       -162°C Cryogenic LNG Tanker Fleet
                     </p>
                   </div>
-                  <span className="font-mono text-xs font-bold text-[#34D399] tabular-nums">
+                  <span className="hidden shrink-0 font-mono text-xs font-bold text-[#34D399] tabular-nums min-[390px]:inline">
                     26,500 SCM / Load
                   </span>
                 </div>
@@ -90,19 +92,21 @@ export const AbujaCorridorSection: React.FC<AbujaCorridorSectionProps> = ({
                   transition={{ duration: 0.6, ease: EASE_OUT_EXPO }}
                   src="/images/virtual-pipeline.jpg"
                   alt="Apex Energy 250-Bar CNG Tube Cascade Trailer and PRMS Skid"
+                  loading="lazy"
+                  decoding="async"
                   className="h-full w-full object-cover object-center"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0B131E]/85 via-transparent to-transparent" />
-                <div className="absolute bottom-4 left-5 right-5 flex items-end justify-between text-white">
+                <div className="absolute inset-x-4 bottom-3 flex items-end justify-between gap-3 text-white sm:inset-x-5 sm:bottom-4">
                   <div>
                     <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#34D399]">
                       REGIONAL INDUSTRIAL CLUSTERS
                     </p>
-                    <p className="font-display text-lg font-bold">
+                    <p className="font-display text-base font-bold leading-snug sm:text-lg">
                       250-Bar Mobile CNG Cascade Skids
                     </p>
                   </div>
-                  <span className="font-mono text-xs font-bold text-[#7DD3FC] tabular-nums">
+                  <span className="hidden shrink-0 font-mono text-xs font-bold text-[#7DD3FC] tabular-nums min-[390px]:inline">
                     8,500 SCM / Skid
                   </span>
                 </div>
@@ -115,13 +119,15 @@ export const AbujaCorridorSection: React.FC<AbujaCorridorSectionProps> = ({
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: '-50px' }}
-              className="grid grid-cols-1 divide-y divide-[#E2E8F0] sm:grid-cols-2 sm:divide-y-0 lg:grid-cols-4 lg:divide-x"
+              aria-label="National gas supply corridors"
+              tabIndex={0}
+              className="mobile-scroll-row flex snap-x snap-mandatory divide-x divide-[#E2E8F0] overflow-x-auto pb-1 lg:grid lg:grid-cols-4 lg:divide-x lg:overflow-visible lg:pb-0"
             >
               {NATIONAL_CORRIDORS.map((corridor, idx) => (
                 <motion.div
                   key={corridor.region}
                   variants={fadeUpVariant}
-                  className="flex flex-col justify-between p-6 sm:p-7 space-y-5 transition-colors hover:bg-[#F8FAFC]/60"
+                  className="flex min-w-[82vw] max-w-[22rem] snap-start flex-col justify-between space-y-5 p-6 transition-colors hover:bg-[#F8FAFC]/60 sm:min-w-[21rem] sm:p-7 lg:min-w-0 lg:max-w-none"
                 >
                   <div className="space-y-2.5">
                     <div className="flex items-center justify-between font-mono text-xs text-[#475569]">
@@ -152,7 +158,7 @@ export const AbujaCorridorSection: React.FC<AbujaCorridorSectionProps> = ({
         </div>
 
         {/* 05 / Proven Client Outcomes with Visual Case Study Photography */}
-        <div className="space-y-10">
+        <div className="space-y-8 sm:space-y-10">
           <motion.div
             variants={fadeUpVariant}
             initial="hidden"
@@ -168,7 +174,7 @@ export const AbujaCorridorSection: React.FC<AbujaCorridorSectionProps> = ({
                 Measured Impact Across Nigerian Enterprises
               </h3>
             </div>
-            <div className="flex flex-wrap items-center gap-3">
+            <div className="flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center">
               <a
                 href={COMPANY_INFO.phoneHref}
                 className="inline-flex h-11 items-center gap-2 rounded-lg border border-[#E2E8F0] bg-white px-4 text-xs font-mono font-semibold text-[#0F172A] hover:border-[#059669] transition-colors tabular-nums"
@@ -192,7 +198,9 @@ export const AbujaCorridorSection: React.FC<AbujaCorridorSectionProps> = ({
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-50px' }}
-            className="grid grid-cols-1 gap-6 lg:grid-cols-2"
+            aria-label="Client case studies"
+            tabIndex={0}
+            className="mobile-scroll-row flex snap-x snap-mandatory gap-4 overflow-x-auto pb-3 sm:gap-6 lg:grid lg:grid-cols-2 lg:overflow-visible lg:pb-0"
           >
             {CLIENT_TESTIMONIALS.map((item) => (
               <motion.div
@@ -200,7 +208,7 @@ export const AbujaCorridorSection: React.FC<AbujaCorridorSectionProps> = ({
                 variants={fadeUpVariant}
                 whileHover={{ y: -3 }}
                 transition={{ duration: 0.25, ease: EASE_OUT_EXPO }}
-                className="flex flex-col justify-between overflow-hidden rounded-2xl border border-[#E2E8F0] bg-white transition-shadow hover:shadow-md"
+                className="flex min-w-[86vw] max-w-[34rem] snap-start flex-col justify-between overflow-hidden rounded-2xl border border-[#E2E8F0] bg-white transition-shadow hover:shadow-md sm:min-w-[31rem] lg:min-w-0 lg:max-w-none"
               >
                 {/* Visual Case Study Image Header */}
                 <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-[#E2E8F0]">
@@ -209,10 +217,12 @@ export const AbujaCorridorSection: React.FC<AbujaCorridorSectionProps> = ({
                     transition={{ duration: 0.6, ease: EASE_OUT_EXPO }}
                     src={item.image}
                     alt={item.imageAlt}
+                    loading="lazy"
+                    decoding="async"
                     className="h-full w-full object-cover object-center"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0B131E]/80 via-transparent to-transparent" />
-                  <div className="absolute bottom-3.5 left-5 right-5 flex items-center justify-between text-white">
+                  <div className="absolute inset-x-4 bottom-3 flex flex-col items-start gap-1 text-white sm:inset-x-5 sm:bottom-3.5 sm:flex-row sm:items-center sm:justify-between">
                     <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-200">
                       {item.caseTag}
                     </span>
@@ -223,7 +233,7 @@ export const AbujaCorridorSection: React.FC<AbujaCorridorSectionProps> = ({
                 </div>
 
                 {/* Quote Body */}
-                <div className="p-7 sm:p-8 flex-1 flex flex-col justify-between space-y-6">
+                <div className="flex flex-1 flex-col justify-between space-y-6 p-5 sm:p-8">
                   <div className="space-y-3">
                     <Quote className="h-5 w-5 text-[#059669]" />
                     <p className="text-base text-[#0F172A] leading-relaxed font-medium">

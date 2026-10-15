@@ -8,6 +8,7 @@ import { SafetyAndFaqSection } from './components/SafetyAndFaqSection'
 import { ContactSection } from './components/ContactSection'
 import { Footer } from './components/Footer'
 import { QuoteModal } from './components/QuoteModal'
+import { MobileActionBar } from './components/MobileActionBar'
 
 export function App() {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false)
@@ -23,7 +24,7 @@ export function App() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F8FAFC] text-[#0F172A]">
+    <div className="min-h-screen flex flex-col overflow-x-clip bg-[#F8FAFC] pb-[calc(4.25rem+env(safe-area-inset-bottom))] text-[#0F172A] lg:pb-0">
       <Navbar onOpenQuote={handleOpenQuote} />
 
       <main className="flex-1">
@@ -36,8 +37,10 @@ export function App() {
       </main>
 
       <Footer onOpenQuote={handleOpenQuote} />
+      <MobileActionBar onOpenQuote={handleOpenQuote} />
 
       <QuoteModal
+        key={`${quoteModalOpen}-${quotePresetNote}`}
         open={quoteModalOpen}
         onOpenChange={setQuoteModalOpen}
         presetNote={quotePresetNote}
