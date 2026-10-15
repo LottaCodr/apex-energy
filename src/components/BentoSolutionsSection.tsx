@@ -33,11 +33,11 @@ export const BentoSolutionsSection: React.FC<BentoSolutionsSectionProps> = ({
   return (
     <section
       id="solutions"
-      className="py-20 lg:py-28 border-b border-[#E2E8F0] bg-[#F8FAFC]"
+      className="border-b border-[#E2E8F0] bg-[#F8FAFC] py-14 sm:py-16 lg:py-28"
     >
-      <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8 space-y-24">
+      <div className="mx-auto max-w-[1320px] space-y-16 px-4 sm:px-6 lg:space-y-24 lg:px-8">
         {/* 01 / Infrastructure Solutions Header */}
-        <div className="space-y-10">
+        <div className="space-y-8 sm:space-y-10">
           <motion.div
             variants={fadeUpVariant}
             initial="hidden"
@@ -64,20 +64,23 @@ export const BentoSolutionsSection: React.FC<BentoSolutionsSectionProps> = ({
 
           {/* Radix UI Tabs: Visual + Architectural Split View */}
           <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="grid w-full grid-cols-2 lg:grid-cols-4 h-auto gap-1.5 bg-[#F1F5F9] p-1.5 rounded-xl">
-              <TabsTrigger value="cng" className="py-3">
+            <TabsList
+              aria-label="Gas infrastructure solutions"
+              className="mobile-scroll-row flex h-auto w-full snap-x snap-mandatory justify-start gap-1.5 overflow-x-auto rounded-xl bg-[#F1F5F9] p-1.5 pb-2 lg:grid lg:grid-cols-4 lg:overflow-visible lg:pb-1.5"
+            >
+              <TabsTrigger value="cng" className="min-w-[15.5rem] snap-start px-3 py-3 lg:min-w-0">
                 <Flame className="h-4 w-4 text-[#059669]" />
                 <span>Industrial CNG (250 Bar)</span>
               </TabsTrigger>
-              <TabsTrigger value="lng" className="py-3">
+              <TabsTrigger value="lng" className="min-w-[15.5rem] snap-start px-3 py-3 lg:min-w-0">
                 <Snowflake className="h-4 w-4 text-[#0284C7]" />
                 <span>Cryogenic LNG (-162°C)</span>
               </TabsTrigger>
-              <TabsTrigger value="virtual-pipeline" className="py-3">
+              <TabsTrigger value="virtual-pipeline" className="min-w-[15.5rem] snap-start px-3 py-3 lg:min-w-0">
                 <Gauge className="h-4 w-4 text-[#059669]" />
                 <span>Virtual Pipeline PRMS</span>
               </TabsTrigger>
-              <TabsTrigger value="autocng" className="py-3">
+              <TabsTrigger value="autocng" className="min-w-[15.5rem] snap-start px-3 py-3 lg:min-w-0">
                 <Truck className="h-4 w-4 text-[#D97706]" />
                 <span>AutoCNG Fleet Mobility</span>
               </TabsTrigger>
@@ -92,15 +95,15 @@ export const BentoSolutionsSection: React.FC<BentoSolutionsSectionProps> = ({
                   className="grid grid-cols-1 lg:grid-cols-12 overflow-hidden rounded-2xl border border-[#E2E8F0] bg-white shadow-xs"
                 >
                   {/* Left 6 Columns: Concise Editorial Narrative & Verification Grid */}
-                  <div className="lg:col-span-6 p-6 sm:p-10 flex flex-col justify-between space-y-8">
+                  <div className="flex flex-col justify-between space-y-7 p-5 sm:p-8 lg:col-span-6 lg:space-y-8 lg:p-10">
                     <div className="space-y-4">
-                      <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-4">
-                        <div className="flex items-center gap-2.5 font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#475569]">
+                      <div className="flex flex-col gap-3 border-b border-[#E2E8F0] pb-4 min-[390px]:flex-row min-[390px]:items-center min-[390px]:justify-between">
+                        <div className="flex items-start gap-2.5 font-mono text-[11px] font-semibold uppercase leading-relaxed tracking-[0.12em] text-[#475569] sm:text-xs sm:tracking-[0.14em]">
                           <span className="text-[#059669]">{tab.index}</span>
                           <span>/</span>
                           <span>{tab.category}</span>
                         </div>
-                        <span className="font-mono text-2xl font-bold text-[#059669] tabular-nums">
+                        <span className="shrink-0 font-mono text-2xl font-bold text-[#059669] tabular-nums">
                           {tab.statValue}
                         </span>
                       </div>
@@ -130,14 +133,15 @@ export const BentoSolutionsSection: React.FC<BentoSolutionsSectionProps> = ({
                       ))}
                     </div>
 
-                    <div className="flex flex-wrap items-center gap-3 pt-2">
+                    <div className="flex flex-col items-stretch gap-3 pt-2 sm:flex-row sm:flex-wrap sm:items-center">
                       <Button
                         variant={tab.accent === 'cryo' ? 'cryo' : 'default'}
                         onClick={() =>
                           onOpenQuote(`Solution Inquiry: ${tab.title}`)
                         }
                       >
-                        <span>Request {tab.title} Proposal</span>
+                        <span className="sm:hidden">Request Proposal</span>
+                        <span className="hidden sm:inline">Request {tab.title} Proposal</span>
                         <ArrowRight className="h-4 w-4" />
                       </Button>
                       <Button variant="outline" asChild>
@@ -155,27 +159,29 @@ export const BentoSolutionsSection: React.FC<BentoSolutionsSectionProps> = ({
                         transition={{ duration: 0.6, ease: EASE_OUT_EXPO }}
                         src={tab.image}
                         alt={tab.imageAlt}
+                        loading="lazy"
+                        decoding="async"
                         className="h-full w-full object-cover object-center"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#0B131E] via-transparent to-transparent opacity-75" />
-                      <div className="absolute bottom-4 left-5 right-5 flex items-end justify-between">
-                        <div>
-                          <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#34D399]">
+                      <div className="absolute inset-x-4 bottom-3 flex items-end justify-between gap-3 sm:inset-x-5 sm:bottom-4">
+                        <div className="min-w-0">
+                          <p className="line-clamp-2 font-mono text-[9px] uppercase leading-snug tracking-[0.12em] text-[#34D399] sm:text-[10px] sm:tracking-[0.14em]">
                             {tab.statLabel}
                           </p>
-                          <p className="font-mono text-3xl font-bold text-white tabular-nums">
+                          <p className="font-mono text-2xl font-bold text-white tabular-nums sm:text-3xl">
                             {tab.statValue}
                           </p>
                         </div>
-                        <span className="font-mono text-[11px] text-[#7DD3FC]">
+                        <span className="hidden shrink-0 font-mono text-[11px] text-[#7DD3FC] min-[390px]:inline">
                           FIELD DEPLOYED
                         </span>
                       </div>
                     </div>
 
                     {/* 2x2 Architectural Spec Hairline Grid */}
-                    <div className="p-6 sm:p-8 space-y-5">
-                      <div className="grid grid-cols-2 gap-px bg-slate-800 border border-slate-800 rounded-xl overflow-hidden">
+                    <div className="space-y-5 p-5 sm:p-8">
+                      <div className="grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-slate-800 bg-slate-800 min-[380px]:grid-cols-2">
                         {tab.specs.map((spec) => (
                           <div key={spec.label} className="bg-[#0B131E] p-4">
                             <p className="font-mono text-[10px] uppercase tracking-wider text-slate-400">
@@ -204,7 +210,7 @@ export const BentoSolutionsSection: React.FC<BentoSolutionsSectionProps> = ({
         </div>
 
         {/* 02 / Visual 3-Phase Deployment Architecture */}
-        <div id="how-it-works" className="space-y-10">
+        <div id="how-it-works" className="space-y-8 sm:space-y-10">
           <motion.div
             variants={fadeUpVariant}
             initial="hidden"
@@ -220,13 +226,14 @@ export const BentoSolutionsSection: React.FC<BentoSolutionsSectionProps> = ({
                 From Diesel Dependency to Clean Gas in Three Phases
               </h3>
             </div>
-            <div className="lg:col-span-5 flex lg:justify-end">
+            <div className="flex lg:col-span-5 lg:justify-end [&>button]:w-full sm:[&>button]:w-auto">
               <Button
                 onClick={() =>
                   onOpenQuote('Deployment Process: Book Phase 1 Site Energy Audit')
                 }
               >
-                <span>Schedule Phase 1 Site Audit</span>
+                <span className="sm:hidden">Book Site Audit</span>
+                <span className="hidden sm:inline">Schedule Phase 1 Site Audit</span>
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </div>
@@ -238,7 +245,9 @@ export const BentoSolutionsSection: React.FC<BentoSolutionsSectionProps> = ({
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-50px' }}
-            className="grid grid-cols-1 gap-6 lg:grid-cols-12"
+            aria-label="Three-phase deployment process"
+            tabIndex={0}
+            className="mobile-scroll-row flex snap-x snap-mandatory gap-4 overflow-x-auto pb-3 sm:gap-6 lg:grid lg:grid-cols-12 lg:overflow-visible lg:pb-0"
           >
             {HOW_IT_WORKS_STEPS.map((item) => (
               <motion.div
@@ -246,7 +255,7 @@ export const BentoSolutionsSection: React.FC<BentoSolutionsSectionProps> = ({
                 variants={fadeUpVariant}
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.25, ease: EASE_OUT_EXPO }}
-                className="lg:col-span-4 flex flex-col justify-between overflow-hidden rounded-2xl border border-[#E2E8F0] bg-white transition-shadow hover:shadow-md"
+                className="flex min-w-[84vw] max-w-[22rem] snap-start flex-col justify-between overflow-hidden rounded-2xl border border-[#E2E8F0] bg-white transition-shadow hover:shadow-md sm:min-w-[22rem] lg:col-span-4 lg:min-w-0 lg:max-w-none"
               >
                 {/* Top Phase Photography */}
                 <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-[#E2E8F0]">
@@ -255,6 +264,8 @@ export const BentoSolutionsSection: React.FC<BentoSolutionsSectionProps> = ({
                     transition={{ duration: 0.6, ease: EASE_OUT_EXPO }}
                     src={item.image}
                     alt={item.imageAlt}
+                    loading="lazy"
+                    decoding="async"
                     className="h-full w-full object-cover object-center"
                   />
                   <div className="absolute top-3 left-3 bg-[#0B131E]/90 px-2.5 py-1 font-mono text-xs font-bold text-[#34D399]">

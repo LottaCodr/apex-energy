@@ -122,9 +122,9 @@ export const RoiCalculatorSection: React.FC<RoiCalculatorSectionProps> = ({
   return (
     <section
       id="calculator"
-      className="py-20 lg:py-28 bg-[#0B131E] text-[#F8FAFC] border-b border-slate-800"
+      className="border-b border-slate-800 bg-[#0B131E] py-14 text-[#F8FAFC] sm:py-16 lg:py-28"
     >
-      <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8 space-y-12">
+      <div className="mx-auto max-w-[1320px] space-y-10 px-4 sm:space-y-12 sm:px-6 lg:px-8">
         {/* Swiss Editorial Section Header */}
         <motion.div
           variants={fadeUpVariant}
@@ -157,13 +157,17 @@ export const RoiCalculatorSection: React.FC<RoiCalculatorSectionProps> = ({
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-50px' }}
-            className="lg:col-span-7 rounded-2xl border border-slate-800 bg-slate-900/70 p-6 sm:p-8 space-y-8"
+            className="space-y-7 rounded-2xl border border-slate-800 bg-slate-900/70 p-5 sm:space-y-8 sm:p-8 lg:col-span-7"
           >
             <div className="space-y-3">
               <label className="block font-mono text-xs font-semibold uppercase tracking-wider text-[#34D399]">
                 1. Select Operational Profile
               </label>
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <div
+                aria-label="Operational profile presets"
+                tabIndex={0}
+                className="mobile-scroll-row flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 sm:grid sm:grid-cols-2 sm:overflow-visible sm:pb-0"
+              >
                 {(Object.keys(SECTOR_PRESETS) as SectorKey[]).map((key) => {
                   const item = SECTOR_PRESETS[key]
                   const IconComponent = item.icon
@@ -176,7 +180,7 @@ export const RoiCalculatorSection: React.FC<RoiCalculatorSectionProps> = ({
                       whileTap={{ scale: 0.99 }}
                       transition={{ duration: 0.2 }}
                       onClick={() => handleSectorSelect(key)}
-                      className={`flex items-start gap-3 rounded-xl border p-4 text-left transition-colors cursor-pointer ${
+                      className={`flex min-w-[78vw] snap-start items-start gap-3 rounded-xl border p-4 text-left transition-colors cursor-pointer sm:min-w-0 ${
                         isSelected
                           ? 'border-[#10B981] bg-[#10B981]/10 text-white'
                           : 'border-slate-800 bg-[#0B131E] text-slate-300 hover:border-slate-700'
@@ -230,17 +234,20 @@ export const RoiCalculatorSection: React.FC<RoiCalculatorSectionProps> = ({
                 aria-label="Monthly Diesel Consumption in Litres"
               />
 
-              <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
-                <span className="text-xs text-slate-400 font-mono">
-                  Presets:
+              <div className="space-y-2 pt-1 sm:flex sm:items-center sm:justify-between sm:gap-2 sm:space-y-0">
+                <span className="block text-xs text-slate-400 font-mono">
+                  Quick presets:
                 </span>
-                <div className="flex flex-wrap gap-2">
+                <div
+                  aria-label="Monthly diesel volume presets"
+                  className="mobile-scroll-row -mx-1 flex gap-2 overflow-x-auto px-1 pb-1"
+                >
                   {[15000, 40000, 75000, 125000, 200000].map((val) => (
                     <button
                       key={val}
                       type="button"
                       onClick={() => setMonthlyDieselLitres(val)}
-                      className={`rounded-md px-2.5 py-1 font-mono text-xs transition-colors cursor-pointer tabular-nums ${
+                      className={`min-h-9 shrink-0 rounded-md px-3 py-1 font-mono text-xs transition-colors cursor-pointer tabular-nums ${
                         monthlyDieselLitres === val
                           ? 'bg-[#10B981] text-[#0B131E] font-bold'
                           : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
@@ -278,9 +285,9 @@ export const RoiCalculatorSection: React.FC<RoiCalculatorSectionProps> = ({
                 aria-label="Current Diesel Price in Naira per Litre"
               />
 
-              <div className="flex justify-between font-mono text-[11px] text-slate-400 tabular-nums">
+              <div className="flex justify-between gap-3 font-mono text-[10px] text-slate-400 tabular-nums sm:text-[11px]">
                 <span>₦1,200 / L</span>
-                <span>Market Avg: ~₦1,650 / L</span>
+                <span className="hidden text-center min-[390px]:inline">Market Avg: ~₦1,650 / L</span>
                 <span>₦2,000 / L</span>
               </div>
             </div>
@@ -338,11 +345,11 @@ export const RoiCalculatorSection: React.FC<RoiCalculatorSectionProps> = ({
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-50px' }}
-            className="lg:col-span-5 rounded-2xl border border-slate-800 bg-slate-900/90 p-6 sm:p-8 space-y-6"
+            className="space-y-6 rounded-2xl border border-slate-800 bg-slate-900/90 p-5 sm:p-8 lg:col-span-5"
           >
-            <div className="flex items-start justify-between border-b border-slate-800 pb-5">
-              <div>
-                <span className="font-mono text-[11px] uppercase tracking-wider text-[#34D399]">
+            <div className="flex flex-col gap-3 border-b border-slate-800 pb-5 min-[390px]:flex-row min-[390px]:items-start min-[390px]:justify-between">
+              <div className="min-w-0">
+                <span className="font-mono text-[10px] uppercase tracking-wider text-[#34D399] sm:text-[11px]">
                   PROJECTED ANNUAL SAVINGS
                 </span>
                 <motion.p
@@ -350,13 +357,14 @@ export const RoiCalculatorSection: React.FC<RoiCalculatorSectionProps> = ({
                   initial={{ opacity: 0.7, y: 3 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.2 }}
-                  className="mt-1 font-mono text-3xl sm:text-4xl font-bold text-white tabular-nums"
+                  className="mt-1 font-mono text-3xl font-bold text-white tabular-nums sm:text-4xl"
                 >
-                  {formatNaira(metrics.annualSavings)}
+                  <span className="sm:hidden">{formatNaira(metrics.annualSavings, true)}</span>
+                  <span className="hidden sm:inline">{formatNaira(metrics.annualSavings)}</span>
                 </motion.p>
               </div>
-              <div className="text-right">
-                <div className="flex items-center justify-end gap-1 text-[#34D399] font-mono text-2xl font-bold tabular-nums">
+              <div className="self-start text-left min-[390px]:text-right">
+                <div className="flex items-center justify-start gap-1 font-mono text-2xl font-bold text-[#34D399] tabular-nums min-[390px]:justify-end">
                   <TrendingDown className="h-5 w-5" />
                   <span>{metrics.savingsPercent}%</span>
                 </div>
@@ -369,12 +377,13 @@ export const RoiCalculatorSection: React.FC<RoiCalculatorSectionProps> = ({
             {/* Monthly Comparison Bar Visualizer with Framer Motion Bar Width */}
             <div className="space-y-4">
               <div className="space-y-1.5">
-                <div className="flex justify-between text-xs font-mono">
+                <div className="flex flex-col gap-1 font-mono text-xs sm:flex-row sm:items-end sm:justify-between">
                   <span className="text-slate-400">
                     Current Monthly Diesel Spend
                   </span>
-                  <span className="text-white font-semibold tabular-nums">
-                    {formatNaira(metrics.currentMonthlyDieselCost)} / mo
+                  <span className="font-semibold text-white tabular-nums">
+                    <span className="sm:hidden">{formatNaira(metrics.currentMonthlyDieselCost, true)}</span>
+                    <span className="hidden sm:inline">{formatNaira(metrics.currentMonthlyDieselCost)}</span> / mo
                   </span>
                 </div>
                 <div className="h-2.5 w-full rounded-sm bg-slate-800 overflow-hidden">
@@ -383,12 +392,13 @@ export const RoiCalculatorSection: React.FC<RoiCalculatorSectionProps> = ({
               </div>
 
               <div className="space-y-1.5">
-                <div className="flex justify-between text-xs font-mono">
+                <div className="flex flex-col gap-1 font-mono text-xs sm:flex-row sm:items-end sm:justify-between">
                   <span className="text-[#34D399]">
                     Projected Apex {useLngBulk ? 'LNG' : 'CNG'} Spend
                   </span>
-                  <span className="text-[#34D399] font-bold tabular-nums">
-                    {formatNaira(metrics.projectedMonthlyGasCost)} / mo
+                  <span className="font-bold text-[#34D399] tabular-nums">
+                    <span className="sm:hidden">{formatNaira(metrics.projectedMonthlyGasCost, true)}</span>
+                    <span className="hidden sm:inline">{formatNaira(metrics.projectedMonthlyGasCost)}</span> / mo
                   </span>
                 </div>
                 <div className="h-2.5 w-full rounded-sm bg-slate-800 overflow-hidden">
@@ -403,7 +413,7 @@ export const RoiCalculatorSection: React.FC<RoiCalculatorSectionProps> = ({
             </div>
 
             {/* Hairline 2x2 Ledger */}
-            <div className="grid grid-cols-2 gap-px bg-slate-800 border border-slate-800 rounded-xl overflow-hidden">
+            <div className="grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-slate-800 bg-slate-800 min-[390px]:grid-cols-2">
               <div className="bg-[#0B131E] p-4">
                 <p className="text-xs text-slate-400">Monthly Net Savings</p>
                 <p className="mt-1 font-mono text-lg font-bold text-[#34D399] tabular-nums">
@@ -446,7 +456,8 @@ export const RoiCalculatorSection: React.FC<RoiCalculatorSectionProps> = ({
                   )
                 }
               >
-                <span>Lock In Rate &amp; Request Custom Proposal</span>
+                <span className="sm:hidden">Request Proposal</span>
+                <span className="hidden sm:inline">Lock In Rate &amp; Request Custom Proposal</span>
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </div>

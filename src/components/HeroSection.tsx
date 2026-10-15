@@ -20,28 +20,28 @@ interface HeroSectionProps {
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenQuote }) => {
   return (
-    <section className="relative overflow-hidden border-b border-[#E2E8F0] bg-[#F8FAFC] pt-12 pb-16 lg:pt-20 lg:pb-24">
-      <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8 space-y-16">
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
+    <section className="relative overflow-hidden border-b border-[#E2E8F0] bg-[#F8FAFC] pb-14 pt-10 sm:pb-16 sm:pt-14 lg:pb-24 lg:pt-20">
+      <div className="mx-auto max-w-[1320px] space-y-12 px-4 sm:space-y-16 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 items-center gap-10 sm:gap-12 lg:grid-cols-12">
           {/* Left 7 Columns: Staggered Editorial Typography & Conversion Actions */}
           <motion.div
             variants={staggerContainerVariant}
             initial="hidden"
             animate="visible"
-            className="lg:col-span-7 space-y-7"
+            className="space-y-6 lg:col-span-7 lg:space-y-7"
           >
             {/* Swiss Monospace Eyebrow */}
             <motion.div
               variants={fadeUpVariant}
-              className="flex items-center gap-2.5 font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#059669]"
+              className="flex items-start gap-2.5 font-mono text-[10px] font-semibold uppercase leading-relaxed tracking-[0.12em] text-[#059669] sm:items-center sm:text-xs sm:tracking-[0.14em]"
             >
-              <span className="h-2 w-2 bg-[#059669]" />
+              <span className="mt-1 h-2 w-2 shrink-0 bg-[#059669] sm:mt-0" />
               <span>MIDSTREAM &amp; DOWNSTREAM GAS INFRASTRUCTURE • NIGERIA</span>
             </motion.div>
 
             <motion.h1
               variants={fadeUpVariant}
-              className="font-display text-4xl font-bold tracking-tight text-[#0F172A] sm:text-5xl lg:text-[58px] lg:leading-[1.05]"
+              className="font-display text-[2rem] font-bold leading-[1.08] tracking-tight text-[#0F172A] min-[380px]:text-4xl sm:text-5xl lg:text-[58px] lg:leading-[1.05]"
             >
               Cut Industrial &amp; Fleet Fuel Costs by{' '}
               <span className="text-[#059669]">58%</span> with Clean{' '}
@@ -51,7 +51,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenQuote }) => {
 
             <motion.p
               variants={fadeUpVariant}
-              className="max-w-2xl text-base sm:text-lg text-[#475569] leading-relaxed"
+              className="max-w-2xl text-[15px] leading-relaxed text-[#475569] sm:text-lg"
             >
               <strong>{COMPANY_INFO.name}</strong> engineers and operates
               250-bar Compressed Natural Gas cascades, -162°C Cryogenic LNG
@@ -63,7 +63,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenQuote }) => {
             {/* Primary Conversion Actions */}
             <motion.div
               variants={fadeUpVariant}
-              className="flex flex-wrap items-center gap-3.5 pt-1"
+              className="flex flex-col items-stretch gap-3 pt-1 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3.5"
             >
               <Button
                 size="lg"
@@ -73,14 +73,16 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenQuote }) => {
                   )
                 }
               >
-                <span>Schedule Free Energy Audit</span>
+                <span className="sm:hidden">Free Energy Audit</span>
+                <span className="hidden sm:inline">Schedule Free Energy Audit</span>
                 <ArrowRight className="h-4 w-4" />
               </Button>
 
               <Button variant="dark" size="lg" asChild>
                 <a href="#calculator">
                   <Calculator className="h-4 w-4 text-[#34D399]" />
-                  <span>Calculate Your Savings</span>
+                  <span className="sm:hidden">Calculate Savings</span>
+                  <span className="hidden sm:inline">Calculate Your Savings</span>
                 </a>
               </Button>
 
@@ -124,14 +126,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenQuote }) => {
           >
             <div className="overflow-hidden rounded-2xl border border-[#E2E8F0] bg-[#0B131E] shadow-xl">
               {/* Top Minimal Telemetry Header */}
-              <div className="flex items-center justify-between border-b border-slate-800 px-5 py-3.5 font-mono text-[11px] text-slate-300">
-                <div className="flex items-center gap-2">
-                  <span className="h-2 w-2 rounded-full bg-[#10B981]" />
-                  <span className="uppercase tracking-wider text-white font-semibold">
-                    CRYOGENIC LNG &amp; CNG COMPRESSION TRAIN
+              <div className="flex items-center justify-between gap-3 border-b border-slate-800 px-4 py-3 font-mono text-[10px] text-slate-300 sm:px-5 sm:py-3.5 sm:text-[11px]">
+                <div className="flex min-w-0 items-center gap-2">
+                  <span className="h-2 w-2 shrink-0 rounded-full bg-[#10B981]" />
+                  <span className="truncate font-semibold uppercase tracking-wider text-white">
+                    <span className="sm:hidden">CNG / LNG SYSTEM</span>
+                    <span className="hidden sm:inline">CRYOGENIC LNG &amp; CNG COMPRESSION TRAIN</span>
                   </span>
                 </div>
-                <span className="text-[#34D399]">24/7 SCADA</span>
+                <span className="shrink-0 text-[#34D399]">24/7 SCADA</span>
               </div>
 
               {/* Facility Photograph with Subtle Hover Scale */}
@@ -141,33 +144,35 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenQuote }) => {
                   transition={{ duration: 0.6, ease: EASE_OUT_EXPO }}
                   src="/images/hero-facility.jpg"
                   alt="Apex Energy Resources Limited Cryogenic LNG Storage and High-Pressure CNG Compression Facility"
+                  fetchPriority="high"
+                  decoding="async"
                   className="h-full w-full object-cover object-center"
                 />
               </div>
 
               {/* Structured Bottom Ledger with 1px Hairline Dividers */}
               <div className="grid grid-cols-3 divide-x divide-slate-800 border-t border-slate-800 bg-[#0B131E] text-white">
-                <div className="p-4">
-                  <p className="font-mono text-[10px] uppercase tracking-wider text-slate-400">
+                <div className="min-w-0 p-3 sm:p-4">
+                  <p className="font-mono text-[9px] uppercase leading-tight tracking-wider text-slate-400 sm:text-[10px]">
                     CNG PRESSURE
                   </p>
-                  <p className="mt-1 font-mono text-base font-bold text-[#34D399] tabular-nums">
+                  <p className="mt-1 whitespace-nowrap font-mono text-sm font-bold text-[#34D399] tabular-nums sm:text-base">
                     250 Bar
                   </p>
                 </div>
-                <div className="p-4">
-                  <p className="font-mono text-[10px] uppercase tracking-wider text-slate-400">
+                <div className="min-w-0 p-3 sm:p-4">
+                  <p className="font-mono text-[9px] uppercase leading-tight tracking-wider text-slate-400 sm:text-[10px]">
                     LNG CRYO STATE
                   </p>
-                  <p className="mt-1 font-mono text-base font-bold text-[#7DD3FC] tabular-nums">
+                  <p className="mt-1 whitespace-nowrap font-mono text-sm font-bold text-[#7DD3FC] tabular-nums sm:text-base">
                     -162°C
                   </p>
                 </div>
-                <div className="p-4">
-                  <p className="font-mono text-[10px] uppercase tracking-wider text-slate-400">
+                <div className="min-w-0 p-3 sm:p-4">
+                  <p className="font-mono text-[9px] uppercase leading-tight tracking-wider text-slate-400 sm:text-[10px]">
                     BENCHMARK
                   </p>
-                  <p className="mt-1 font-mono text-base font-bold text-white tabular-nums">
+                  <p className="mt-1 whitespace-nowrap font-mono text-sm font-bold text-white tabular-nums sm:text-base">
                     ₦320/SCM
                   </p>
                 </div>
@@ -182,13 +187,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenQuote }) => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-40px' }}
-          className="grid grid-cols-1 divide-y divide-[#E2E8F0] rounded-2xl border border-[#E2E8F0] bg-white sm:grid-cols-2 sm:divide-y-0 lg:grid-cols-4 lg:divide-x"
+          aria-label="Apex Energy performance benchmarks"
+          tabIndex={0}
+          className="mobile-scroll-row flex snap-x snap-mandatory divide-x divide-[#E2E8F0] overflow-x-auto rounded-2xl border border-[#E2E8F0] bg-white pb-1 sm:grid sm:grid-cols-2 sm:divide-x-0 sm:overflow-visible sm:pb-0 lg:grid-cols-4 lg:divide-x"
         >
           {TRUST_BENCHMARKS.map((item) => (
             <motion.div
               key={item.label}
               variants={fadeUpVariant}
-              className="p-6 sm:p-7"
+              className="min-w-[78vw] snap-start p-6 sm:min-w-0 sm:p-7"
             >
               <p className="font-mono text-3xl sm:text-4xl font-bold tracking-tight text-[#0F172A] tabular-nums">
                 {item.metric}

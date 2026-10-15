@@ -8,6 +8,8 @@ import {
 } from 'lucide-react'
 import { COMPANY_INFO } from '../data/energyData'
 
+const CURRENT_YEAR = new Date().getFullYear()
+
 interface FooterProps {
   onOpenQuote: (presetNote?: string) => void
 }
@@ -15,10 +17,10 @@ interface FooterProps {
 export const Footer: React.FC<FooterProps> = ({ onOpenQuote }) => {
   return (
     <footer className="bg-[#0B131E] text-slate-300 border-t border-slate-800">
-      <div className="mx-auto max-w-[1320px] px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
+      <div className="mx-auto max-w-[1320px] px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-12">
           {/* Brand & Corporate HQ Identity (5 cols) */}
-          <div className="lg:col-span-5 space-y-4">
+          <div className="space-y-4 sm:col-span-2 lg:col-span-5">
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#059669] text-white">
                 <Flame className="h-5 w-5" />
@@ -54,7 +56,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenQuote }) => {
                 <Mail className="h-4 w-4 text-[#38BDF8]" />
                 <a
                   href={COMPANY_INFO.emailHref}
-                  className="hover:text-[#7DD3FC] transition-colors"
+                  className="break-all transition-colors hover:text-[#7DD3FC]"
                 >
                   {COMPANY_INFO.emailDisplay}
                 </a>
@@ -130,7 +132,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenQuote }) => {
                 onClick={() =>
                   onOpenQuote('Footer CTA: Request Free Energy Audit & Gas Quote')
                 }
-                className="rounded-lg bg-[#059669] px-4 py-2.5 text-xs font-semibold text-white hover:bg-[#047857] transition-colors cursor-pointer"
+                className="min-h-11 w-full rounded-lg bg-[#059669] px-4 py-2.5 text-xs font-semibold text-white transition-colors hover:bg-[#047857] cursor-pointer sm:w-auto"
               >
                 Schedule Free Energy Audit
               </button>
@@ -138,12 +140,12 @@ export const Footer: React.FC<FooterProps> = ({ onOpenQuote }) => {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-slate-800/90 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+        <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-slate-800/90 pt-6 text-xs text-slate-400 sm:flex-row sm:items-center">
           <p>
-            © {new Date().getFullYear()} {COMPANY_INFO.name}. Headquartered in
+            © {CURRENT_YEAR} {COMPANY_INFO.name}. Headquartered in
             Abuja, Nigeria. Serving Industrial &amp; Mobility Clients Nationwide.
           </p>
-          <div className="flex items-center gap-2 font-mono text-[11px] text-[#34D399]">
+          <div className="flex items-start gap-2 font-mono text-[10px] leading-relaxed text-[#34D399] sm:items-center sm:text-[11px]">
             <ShieldCheck className="h-4 w-4" />
             <span>NMDPRA LICENSED • SON ISO 11439 • PCNGi PARTNER</span>
           </div>

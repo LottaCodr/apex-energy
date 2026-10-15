@@ -5,6 +5,33 @@
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     color: #0F172A;
     background-color: #F8FAFC;
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    overflow-x: hidden;
+    overflow-x: clip;
+    background-color: #F8FAFC;
+    text-rendering: optimizeLegibility;
+  }
+
+  button,
+  a,
+  input,
+  select,
+  textarea {
+    touch-action: manipulation;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  ::selection {
+    background: rgba(5, 150, 105, 0.18);
+    color: #0F172A;
   }
 
   h1, h2, h3, h4, .font-display {
@@ -49,4 +76,49 @@
 
 .animate-pulse-glow {
   animation: pulseGlow 2.6s ease-in-out infinite;
+}
+
+/* Reusable, touch-friendly horizontal rails for compact screens. */
+.mobile-scroll-row {
+  overscroll-behavior-inline: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #94A3B8 transparent;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mobile-scroll-row::-webkit-scrollbar {
+  height: 4px;
+}
+
+.mobile-scroll-row::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.mobile-scroll-row::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: #94A3B8;
+}
+
+@media (max-width: 767px) {
+  /* Prevent Safari from zooming the viewport when a form control receives focus. */
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

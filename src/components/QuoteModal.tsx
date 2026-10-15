@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { CheckCircle2, Flame, Mail, Phone, Send } from 'lucide-react'
 import { COMPANY_INFO } from '../data/energyData'
 import { Button } from './ui/button'
@@ -28,15 +28,6 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
   const [notes, setNotes] = useState(presetNote)
   const [ticketId, setTicketId] = useState<string | null>(null)
 
-  useEffect(() => {
-    if (presetNote) {
-      setNotes(presetNote)
-    }
-    if (!open) {
-      setTicketId(null)
-    }
-  }, [presetNote, open])
-
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     const num = Math.floor(100000 + Math.random() * 900000)
@@ -46,8 +37,8 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-xl">
-        <DialogHeader>
-          <DialogTitle className="flex items-center gap-2">
+        <DialogHeader className="pr-9 sm:pr-10">
+          <DialogTitle className="flex items-start gap-2">
             <Flame className="h-5 w-5 text-[#059669]" />
             <span>Request Gas Off-Take &amp; Engineering Proposal</span>
           </DialogTitle>
@@ -86,11 +77,11 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                   {COMPANY_INFO.phoneDisplay}
                 </a>
               </p>
-              <p className="text-[#475569]">
+              <p className="break-all text-[#475569]">
                 Email:{' '}
                 <a
                   href={COMPANY_INFO.emailHref}
-                  className="text-[#0284C7] font-bold"
+                  className="font-bold text-[#0284C7]"
                 >
                   {COMPANY_INFO.emailDisplay}
                 </a>
@@ -111,6 +102,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                 <input
                   type="text"
                   required
+                  autoComplete="name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Engr. Ibrahim Danjuma"
@@ -125,6 +117,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                 <input
                   type="text"
                   required
+                  autoComplete="organization"
                   value={organization}
                   onChange={(e) => setOrganization(e.target.value)}
                   placeholder="Continental Industrial PLC"
@@ -139,6 +132,8 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                 <input
                   type="tel"
                   required
+                  autoComplete="tel"
+                  inputMode="tel"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="+234 802 000 0000"
@@ -153,6 +148,8 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                 <input
                   type="email"
                   required
+                  autoComplete="email"
+                  inputMode="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="name@company.com"
@@ -173,7 +170,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
               />
             </div>
 
-            <div className="rounded-xl bg-[#0B131E] p-3.5 text-xs text-slate-300 flex flex-wrap items-center justify-between gap-2">
+            <div className="flex flex-col items-start justify-between gap-2 rounded-xl bg-[#0B131E] p-3.5 text-xs text-slate-300 sm:flex-row sm:flex-wrap sm:items-center">
               <a
                 href={COMPANY_INFO.phoneHref}
                 className="inline-flex items-center gap-1.5 font-mono text-[#34D399] hover:underline"
@@ -183,14 +180,14 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
               </a>
               <a
                 href={COMPANY_INFO.emailHref}
-                className="inline-flex items-center gap-1.5 font-mono text-[#7DD3FC] hover:underline"
+                className="inline-flex min-w-0 items-center gap-1.5 break-all font-mono text-[#7DD3FC] hover:underline"
               >
                 <Mail className="h-3.5 w-3.5" />
                 <span>{COMPANY_INFO.emailDisplay}</span>
               </a>
             </div>
 
-            <div className="flex justify-end gap-2.5 pt-1">
+            <div className="flex flex-col-reverse items-stretch justify-end gap-2.5 pt-1 sm:flex-row sm:items-center [&>button]:w-full sm:[&>button]:w-auto">
               <Button
                 type="button"
                 variant="outline"
@@ -200,7 +197,8 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
               </Button>
               <Button type="submit">
                 <Send className="h-4 w-4" />
-                <span>Submit Engineering Request</span>
+                <span className="sm:hidden">Submit Request</span>
+                <span className="hidden sm:inline">Submit Engineering Request</span>
               </Button>
             </div>
           </form>

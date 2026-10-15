@@ -18,10 +18,10 @@ export const SafetyAndFaqSection: React.FC = () => {
   return (
     <section
       id="faq"
-      className="py-20 lg:py-28 border-b border-[#E2E8F0] bg-white"
+      className="border-b border-[#E2E8F0] bg-white py-14 sm:py-16 lg:py-28"
     >
       <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 items-start">
+        <div className="grid grid-cols-1 items-start gap-10 sm:gap-12 lg:grid-cols-12">
           {/* Left 5 Columns: Swiss Editorial Header + Engineer Visual Card */}
           <motion.div
             variants={fadeUpVariant}
@@ -52,10 +52,12 @@ export const SafetyAndFaqSection: React.FC = () => {
                   transition={{ duration: 0.6, ease: EASE_OUT_EXPO }}
                   src="/images/engineers-scada.jpg"
                   alt="Apex Energy Nigerian Gas Engineers inspecting PRMS pressure gauges"
+                  loading="lazy"
+                  decoding="async"
                   className="h-full w-full object-cover object-center"
                 />
               </div>
-              <div className="p-6 space-y-3">
+              <div className="space-y-3 p-5 sm:p-6">
                 <p className="font-display text-base font-bold text-[#0F172A]">
                   Speak with a Gas Infrastructure Engineer
                 </p>
@@ -77,7 +79,7 @@ export const SafetyAndFaqSection: React.FC = () => {
                     className="flex items-center gap-2.5 text-[#0284C7] font-semibold hover:underline"
                   >
                     <Mail className="h-4 w-4 text-[#0284C7]" />
-                    <span>{COMPANY_INFO.emailDisplay}</span>
+                    <span className="break-all">{COMPANY_INFO.emailDisplay}</span>
                   </a>
                 </div>
               </div>
