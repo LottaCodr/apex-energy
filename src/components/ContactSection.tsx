@@ -1,29 +1,35 @@
 import React, { useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import {
   Building2,
   CheckCircle2,
-  Clock,
-  Copy,
   Check,
+  Copy,
   Mail,
-  Globe,
+  MapPin,
   Phone,
   Send,
   ShieldCheck,
 } from 'lucide-react'
-import { COMPANY_INFO } from '../data/energyData'
-import { fadeUpVariant, EASE_OUT_EXPO } from '../lib/motion'
+import { COMPANY_INFO } from '../data/companyData'
+import { fadeUpVariant } from '../lib/motion'
 import { Button } from './ui/button'
+
+const ENQUIRY_TYPES = [
+  'Owner Engineer (OE) Mandate — $3M',
+  'Equity / Debt Participation — $35M',
+  'Strategic Partnership & Offtake',
+  'Government & Development Finance',
+  'EPC / Equipment Supply',
+  'General Corporate Enquiry',
+]
 
 export const ContactSection: React.FC = () => {
   const [fullName, setFullName] = useState('')
-  const [companyName, setCompanyName] = useState('')
+  const [organization, setOrganization] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
-  const [location, setLocation] = useState('')
-  const [solutionType, setSolutionType] = useState('Industrial CNG Virtual Pipeline & PRMS')
-  const [monthlyVolume, setMonthlyVolume] = useState('50,000 to 150,000 SCM / Month')
+  const [enquiryType, setEnquiryType] = useState(ENQUIRY_TYPES[0])
   const [message, setMessage] = useState('')
   const [submittedRef, setSubmittedRef] = useState<string | null>(null)
   const [copiedField, setCopiedField] = useState<string | null>(null)
@@ -36,44 +42,43 @@ export const ContactSection: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    const randomCode = Math.floor(100000 + Math.random() * 900000)
-    setSubmittedRef(`APEX-NG-${randomCode}`)
+    const code = Math.floor(100000 + Math.random() * 900000)
+    setSubmittedRef(`APEX-IR-${code}`)
   }
 
   return (
     <section
       id="contact"
-      className="border-b border-[#E2E8F0] bg-[#F8FAFC] py-14 sm:py-16 lg:py-28"
+      className="border-b border-[#E2E8F0] bg-white py-14 sm:py-16 lg:py-28"
     >
       <div className="mx-auto max-w-[1320px] space-y-10 px-4 sm:space-y-12 sm:px-6 lg:px-8">
-        {/* Swiss Editorial Section Header */}
+        {/* Header */}
         <motion.div
           variants={fadeUpVariant}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-60px' }}
-          className="grid grid-cols-1 gap-6 lg:grid-cols-12 items-end border-b border-[#E2E8F0] pb-8"
+          className="grid grid-cols-1 items-end gap-6 border-b border-[#E2E8F0] pb-8 lg:grid-cols-12"
         >
-          <div className="lg:col-span-7 space-y-3">
+          <div className="space-y-3 lg:col-span-7">
             <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-[#059669]">
-              07 / INITIATE GAS SUPPLY OR FLEET TRANSITION
+              08 / START A CONVERSATION
             </p>
             <h2 className="font-display text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-              Partner with {COMPANY_INFO.name}
+              Talk to the {COMPANY_INFO.shortName} Investment Desk
             </h2>
           </div>
           <div className="lg:col-span-5">
-            <p className="text-sm sm:text-base text-[#475569] leading-relaxed">
-              Connect with our engineering and commercial off-take desk for Gas
-              Sale &amp; Purchase Agreements (GSPA), Virtual Pipeline PRMS
-              skids, Cryogenic LNG supply, or commercial fleet conversions
-              anywhere in Nigeria.
+            <p className="text-sm leading-relaxed text-[#475569] sm:text-base">
+              Whether you are appointing the Owner Engineer, participating in
+              the $35M tranche, or exploring strategic offtake — the desk
+              responds within one business day.
             </p>
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 items-start">
-          {/* Left 5 Columns: Direct Corporate & Dispatch Ledger */}
+        <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-12">
+          {/* Corporate Ledger */}
           <motion.div
             variants={fadeUpVariant}
             initial="hidden"
@@ -84,24 +89,28 @@ export const ContactSection: React.FC = () => {
             <div className="space-y-6 rounded-2xl border border-slate-800 bg-[#0B131E] p-5 text-white sm:p-8">
               <div>
                 <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-[#34D399]">
-                  CORPORATE &amp; ENGINEERING DESK
+                  INVESTOR RELATIONS &amp; CORPORATE DESK
                 </p>
                 <h3 className="mt-1.5 font-display text-2xl font-bold text-white">
                   {COMPANY_INFO.name}
                 </h3>
+                <p className="mt-2 text-xs leading-relaxed text-slate-400">
+                  {COMPANY_INFO.positioning}
+                </p>
               </div>
 
-              {/* Phone Block */}
-              <div className="rounded-xl border border-slate-800 bg-slate-900/90 p-4 space-y-2">
-                <div className="flex items-center justify-between">
+              {/* Phone */}
+              <div className="space-y-2 rounded-xl border border-slate-800 bg-slate-900/90 p-4">
+                <div className="flex items-center justify-between gap-3">
                   <span className="font-mono text-[10px] uppercase tracking-wider text-slate-400">
-                    <span className="sm:hidden">PHONE &amp; DISPATCH</span>
-                    <span className="hidden sm:inline">DIRECT TELEPHONE &amp; DISPATCH</span>
+                    DIRECT TELEPHONE
                   </span>
                   <button
                     type="button"
-                    onClick={() => handleCopy(COMPANY_INFO.phoneDisplay, 'phone')}
-                    className="inline-flex items-center gap-1 text-xs font-mono text-[#34D399] hover:underline cursor-pointer"
+                    onClick={() =>
+                      handleCopy(COMPANY_INFO.phoneDisplay, 'phone')
+                    }
+                    className="inline-flex cursor-pointer items-center gap-1 font-mono text-xs text-[#34D399] hover:underline"
                   >
                     {copiedField === 'phone' ? (
                       <>
@@ -118,366 +127,257 @@ export const ContactSection: React.FC = () => {
                 </div>
                 <a
                   href={COMPANY_INFO.phoneHref}
-                  className="flex min-w-0 items-center gap-2.5 font-mono text-base font-bold text-white transition-colors hover:text-[#34D399] min-[380px]:text-lg sm:gap-3 sm:text-2xl tabular-nums"
+                  className="flex min-h-11 items-center gap-2.5 font-mono text-sm text-white transition-colors hover:text-[#34D399]"
                 >
-                  <Phone className="h-5 w-5 text-[#10B981] shrink-0" />
-                  <span>{COMPANY_INFO.phoneDisplay}</span>
-                </a>
-              </div>
-
-              {/* Email Block */}
-              <div className="rounded-xl border border-slate-800 bg-slate-900/90 p-4 space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-slate-400">
-                    OFFICIAL CORPORATE EMAIL
+                  <Phone className="h-4 w-4 text-[#10B981]" />
+                  <span className="tabular-nums">
+                    {COMPANY_INFO.phoneDisplay}
                   </span>
-                  <button
-                    type="button"
-                    onClick={() => handleCopy(COMPANY_INFO.emailDisplay, 'email')}
-                    className="inline-flex items-center gap-1 text-xs font-mono text-[#7DD3FC] hover:underline cursor-pointer"
-                  >
-                    {copiedField === 'email' ? (
-                      <>
-                        <Check className="h-3.5 w-3.5" />
-                        <span>Copied</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="h-3.5 w-3.5" />
-                        <span>Copy</span>
-                      </>
-                    )}
-                  </button>
-                </div>
-                <a
-                  href={COMPANY_INFO.emailHref}
-                  className="flex items-center gap-3 font-mono text-base sm:text-lg font-bold text-[#7DD3FC] hover:text-white transition-colors break-all"
-                >
-                  <Mail className="h-5 w-5 text-[#38BDF8] shrink-0" />
-                  <span>{COMPANY_INFO.emailDisplay}</span>
                 </a>
               </div>
 
-              {/* Corporate HQ & National Scope */}
-              <div className="space-y-4 pt-3 border-t border-slate-800 text-xs text-slate-300">
-                <div className="flex items-start gap-3">
-                  <Building2 className="h-4 w-4 text-[#10B981] shrink-0 mt-0.5" />
-                  <div>
-                    <p className="font-semibold text-white">
-                      Corporate Headquarters:
+              {/* Emails */}
+              <div className="space-y-3 rounded-xl border border-slate-800 bg-slate-900/90 p-4">
+                <span className="font-mono text-[10px] uppercase tracking-wider text-slate-400">
+                  ELECTRONIC MAIL
+                </span>
+                {[
+                  {
+                    label: 'Investor Relations & Corporate',
+                    value: COMPANY_INFO.emailDisplay,
+                    href: COMPANY_INFO.emailHref,
+                    color: 'text-[#34D399]',
+                  },
+                ].map((item) => (
+                  <div key={item.label} className="space-y-1">
+                    <p className="text-[10px] uppercase tracking-wide text-slate-500">
+                      {item.label}
                     </p>
-                    <p className="mt-0.5 leading-relaxed">
-                      {COMPANY_INFO.headquarters}
-                    </p>
+                    <a
+                      href={item.href}
+                      className={`flex items-start gap-2.5 font-mono text-xs break-all transition-opacity hover:opacity-80 ${item.color}`}
+                    >
+                      <Mail className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+                      {item.value}
+                    </a>
                   </div>
-                </div>
+                ))}
+              </div>
 
-                <div className="flex items-start gap-3">
-                  <Globe className="h-4 w-4 text-[#38BDF8] shrink-0 mt-0.5" />
-                  <div>
-                    <p className="font-semibold text-white">
-                      Operational Footprint:
-                    </p>
-                    <p className="mt-0.5 leading-relaxed">
-                      {COMPANY_INFO.operationsScope}
-                    </p>
-                  </div>
+              {/* HQ */}
+              <div className="flex items-start gap-2.5 border-t border-slate-800 pt-5">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#10B981]" />
+                <div>
+                  <p className="font-mono text-[10px] uppercase tracking-wider text-slate-400">
+                    CORPORATE HEADQUARTERS
+                  </p>
+                  <p className="mt-1 text-xs leading-relaxed text-slate-300">
+                    {COMPANY_INFO.headquarters}
+                  </p>
                 </div>
+              </div>
 
-                <div className="flex items-start gap-3">
-                  <Clock className="h-4 w-4 text-[#FBBF24] shrink-0 mt-0.5" />
-                  <div>
-                    <p className="font-semibold text-white">
-                      Operations &amp; Dispatch Hours:
-                    </p>
-                    <p className="mt-0.5 leading-relaxed">
-                      {COMPANY_INFO.operatingHours}
-                    </p>
-                  </div>
-                </div>
+              <div className="flex items-start gap-2.5 rounded-xl border border-[#059669]/25 bg-[#059669]/10 p-3.5">
+                <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#34D399]" />
+                <p className="text-[11px] leading-relaxed text-slate-200">
+                  Material shared under NDA on request. Financial models,
+                  feedstock agreements and permit documentation are released
+                  through the data room process.
+                </p>
               </div>
             </div>
           </motion.div>
 
-          {/* Right 7 Columns: Engineering Off-Take & Supply Consultation Form */}
+          {/* Enquiry Form */}
           <motion.div
             variants={fadeUpVariant}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-50px' }}
-            className="rounded-2xl border border-[#E2E8F0] bg-white p-5 sm:p-8 lg:col-span-7 lg:p-10"
+            className="lg:col-span-7"
           >
-            <AnimatePresence mode="wait">
+            <div className="rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-5 sm:p-7">
               {submittedRef ? (
-                <motion.div
-                  key="submitted"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.35, ease: EASE_OUT_EXPO }}
-                  className="py-8 space-y-6 text-center"
-                >
+                <div className="space-y-5 py-6 text-center">
                   <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-xl bg-[#059669]/10 text-[#059669]">
                     <CheckCircle2 className="h-8 w-8" />
                   </div>
-                  <div className="space-y-2">
-                    <p className="font-mono text-xs font-bold uppercase tracking-wider text-[#059669]">
-                      DISPATCH TICKET LOGGED • {submittedRef}
+                  <div className="space-y-1.5">
+                    <p className="font-mono text-xs font-bold text-[#059669]">
+                      ENQUIRY REFERENCE: {submittedRef}
                     </p>
-                    <h3 className="font-display text-2xl font-bold text-[#0F172A]">
-                      Engineering Inquiry Received
-                    </h3>
-                    <p className="mx-auto max-w-lg text-sm text-[#475569] leading-relaxed">
-                      Thank you, <strong>{fullName}</strong> ({companyName}). Our
-                      engineering desk has logged your inquiry for{' '}
-                      <strong>{solutionType}</strong>.
+                    <h4 className="font-display text-xl font-bold text-[#0F172A]">
+                      Routed to the Investment Desk
+                    </h4>
+                    <p className="text-sm text-[#475569]">
+                      Thank you, <strong>{fullName}</strong>
+                      {organization ? ` (${organization})` : ''}. Your{' '}
+                      {enquiryType.toLowerCase()} enquiry has been logged and
+                      will be answered within one business day.
                     </p>
                   </div>
 
-                  <div className="mx-auto max-w-md rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] p-4 text-left space-y-2 font-mono text-xs">
-                    <div className="flex flex-col gap-1 min-[420px]:flex-row min-[420px]:justify-between">
-                      <span className="text-[#475569]">Reference ID:</span>
-                      <span className="font-bold text-[#0F172A]">{submittedRef}</span>
-                    </div>
-                    <div className="flex flex-col gap-1 min-[420px]:flex-row min-[420px]:justify-between">
-                      <span className="text-[#475569]">Est. Volume:</span>
-                      <span className="font-bold text-[#059669]">{monthlyVolume}</span>
-                    </div>
-                    <div className="flex flex-col gap-1 min-[420px]:flex-row min-[420px]:justify-between">
-                      <span className="text-[#475569]">Direct Desk:</span>
-                      <span className="font-bold text-[#0F172A]">
-                        {COMPANY_INFO.phoneDisplay}
-                      </span>
-                    </div>
-                    <div className="flex flex-col gap-1 min-[420px]:flex-row min-[420px]:justify-between">
-                      <span className="text-[#475569]">Email Desk:</span>
-                      <span className="font-bold text-[#0284C7]">
-                        {COMPANY_INFO.emailDisplay}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col items-stretch justify-center gap-3 pt-2 sm:flex-row sm:flex-wrap sm:items-center [&>*]:w-full sm:[&>*]:w-auto">
-                    <Button asChild>
+                  <div className="space-y-1.5 rounded-xl border border-[#E2E8F0] bg-white p-4 text-left font-mono text-xs">
+                    <p className="font-semibold text-[#0F172A]">
+                      Priority channels:
+                    </p>
+                    <p className="text-[#475569]">
+                      Phone:{' '}
                       <a
-                        href={`mailto:${COMPANY_INFO.emailDisplay}?subject=${encodeURIComponent(
-                          `[${submittedRef}] Gas Supply Proposal: ${companyName}`
-                        )}&body=${encodeURIComponent(
-                          `Name: ${fullName}\nCompany: ${companyName}\nPhone: ${phone}\nLocation: ${location}\nSolution: ${solutionType}\nVolume: ${monthlyVolume}\n\nNotes:\n${message}`
-                        )}`}
+                        href={COMPANY_INFO.phoneHref}
+                        className="font-bold text-[#059669]"
                       >
-                        <Mail className="h-4 w-4" />
-                        <span className="sm:hidden">Email a Copy</span>
-                        <span className="hidden sm:inline">Send Copy via Email Client</span>
+                        {COMPANY_INFO.phoneDisplay}
                       </a>
-                    </Button>
-                    <Button
-                      variant="outline"
-                      onClick={() => setSubmittedRef(null)}
-                    >
-                      Submit Another Inquiry
-                    </Button>
-                  </div>
-                </motion.div>
-              ) : (
-                <motion.form
-                  key="form"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.25 }}
-                  onSubmit={handleSubmit}
-                  className="space-y-5"
-                >
-                  <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#E2E8F0] pb-4">
-                    <div>
-                      <h3 className="font-display text-xl font-bold text-[#0F172A]">
-                        Request Industrial Gas Off-Take or Site Audit
-                      </h3>
-                      <p className="text-xs text-[#475569]">
-                        Response within 2 business hours from our gas engineering
-                        team.
-                      </p>
-                    </div>
-                    <span className="inline-flex items-center gap-1.5 font-mono text-xs text-[#059669] font-semibold">
-                      <ShieldCheck className="h-4 w-4" />
-                      <span>NDA Protected</span>
-                    </span>
+                    </p>
+                    <p className="break-all text-[#475569]">
+                      Email:{' '}
+                      <a
+                        href={COMPANY_INFO.emailHref}
+                        className="font-bold text-[#0284C7]"
+                      >
+                        {COMPANY_INFO.emailDisplay}
+                      </a>
+                    </p>
                   </div>
 
+                  <Button onClick={() => setSubmittedRef(null)}>
+                    Submit another enquiry
+                  </Button>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div className="space-y-1.5">
-                      <label className="block text-xs font-semibold text-[#0F172A]">
-                        Full Name &amp; Title *
+                      <label
+                        htmlFor="fullName"
+                        className="block text-xs font-semibold text-[#0F172A]"
+                      >
+                        Full Name *
                       </label>
                       <input
+                        id="fullName"
                         type="text"
                         required
                         autoComplete="name"
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
-                        placeholder="Engr. Adebayo Musa"
-                        className="w-full rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] px-3.5 py-2.5 text-sm text-[#0F172A] focus:border-[#059669] focus:bg-white focus:outline-none"
+                        placeholder="Engr. Ibrahim Danjuma"
+                        className="w-full rounded-lg border border-[#E2E8F0] bg-white px-3 py-2.5 text-sm text-[#0F172A] focus:border-[#059669] focus:outline-none focus:ring-1 focus:ring-[#059669]"
                       />
                     </div>
 
                     <div className="space-y-1.5">
-                      <label className="block text-xs font-semibold text-[#0F172A]">
-                        Company / Organization Name *
+                      <label
+                        htmlFor="organization"
+                        className="block text-xs font-semibold text-[#0F172A]"
+                      >
+                        Organization / Institution *
                       </label>
                       <input
+                        id="organization"
                         type="text"
                         required
                         autoComplete="organization"
-                        value={companyName}
-                        onChange={(e) => setCompanyName(e.target.value)}
-                        placeholder="Continental Manufacturing PLC"
-                        className="w-full rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] px-3.5 py-2.5 text-sm text-[#0F172A] focus:border-[#059669] focus:bg-white focus:outline-none"
+                        value={organization}
+                        onChange={(e) => setOrganization(e.target.value)}
+                        placeholder="Zenith Capital Partners"
+                        className="w-full rounded-lg border border-[#E2E8F0] bg-white px-3 py-2.5 text-sm text-[#0F172A] focus:border-[#059669] focus:outline-none focus:ring-1 focus:ring-[#059669]"
                       />
                     </div>
 
                     <div className="space-y-1.5">
-                      <label className="block text-xs font-semibold text-[#0F172A]">
-                        Corporate Email Address *
+                      <label
+                        htmlFor="email"
+                        className="block text-xs font-semibold text-[#0F172A]"
+                      >
+                        Business Email *
                       </label>
                       <input
+                        id="email"
                         type="email"
                         required
                         autoComplete="email"
                         inputMode="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        placeholder="procurement@company.com.ng"
-                        className="w-full rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] px-3.5 py-2.5 text-sm text-[#0F172A] focus:border-[#059669] focus:bg-white focus:outline-none"
+                        placeholder="name@institution.com"
+                        className="w-full rounded-lg border border-[#E2E8F0] bg-white px-3 py-2.5 text-sm text-[#0F172A] focus:border-[#059669] focus:outline-none focus:ring-1 focus:ring-[#059669]"
                       />
                     </div>
 
                     <div className="space-y-1.5">
-                      <label className="block text-xs font-semibold text-[#0F172A]">
-                        Direct Telephone Number *
+                      <label
+                        htmlFor="phone"
+                        className="block text-xs font-semibold text-[#0F172A]"
+                      >
+                        Telephone
                       </label>
                       <input
+                        id="phone"
                         type="tel"
-                        required
                         autoComplete="tel"
                         inputMode="tel"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
-                        placeholder="+234 803 000 0000"
-                        className="w-full rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] px-3.5 py-2.5 text-sm text-[#0F172A] font-mono focus:border-[#059669] focus:bg-white focus:outline-none"
+                        placeholder="+234 802 000 0000"
+                        className="w-full rounded-lg border border-[#E2E8F0] bg-white px-3 py-2.5 font-mono text-sm text-[#0F172A] focus:border-[#059669] focus:outline-none focus:ring-1 focus:ring-[#059669]"
                       />
-                    </div>
-
-                    <div className="space-y-1.5">
-                      <label className="block text-xs font-semibold text-[#0F172A]">
-                        Facility / Fleet State or City
-                      </label>
-                      <input
-                        type="text"
-                        autoComplete="address-level1"
-                        value={location}
-                        onChange={(e) => setLocation(e.target.value)}
-                        placeholder="e.g. Abuja, Lagos, Ogun, Port Harcourt, Kano"
-                        className="w-full rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] px-3.5 py-2.5 text-sm text-[#0F172A] focus:border-[#059669] focus:bg-white focus:outline-none"
-                      />
-                    </div>
-
-                    <div className="space-y-1.5">
-                      <label className="block text-xs font-semibold text-[#0F172A]">
-                        Required Gas Infrastructure Solution
-                      </label>
-                      <select
-                        value={solutionType}
-                        onChange={(e) => setSolutionType(e.target.value)}
-                        className="w-full rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] px-3.5 py-2.5 text-sm text-[#0F172A] focus:border-[#059669] focus:bg-white focus:outline-none"
-                      >
-                        <option value="Industrial CNG Virtual Pipeline & PRMS">
-                          Industrial CNG Virtual Pipeline &amp; PRMS (250 Bar)
-                        </option>
-                        <option value="Cryogenic LNG Bulk Supply & Regasification">
-                          Cryogenic LNG Bulk Supply &amp; Regasification (-162°C)
-                        </option>
-                        <option value="Captive Power Gas Generator / Dual-Fuel Retrofit">
-                          Captive Power Gas Generator / Dual-Fuel Retrofit
-                        </option>
-                        <option value="AutoCNG Commercial Fleet Conversion & Refueling">
-                          AutoCNG Commercial Fleet Conversion &amp; Refueling
-                        </option>
-                        <option value="Daughter Station Co-Location Partnership">
-                          Daughter Station Co-Location Partnership
-                        </option>
-                      </select>
                     </div>
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="block text-xs font-semibold text-[#0F172A]">
-                      Estimated Monthly Energy / Fuel Demand
+                    <label
+                      htmlFor="enquiryType"
+                      className="block text-xs font-semibold text-[#0F172A]"
+                    >
+                      Nature of Enquiry *
                     </label>
                     <select
-                      value={monthlyVolume}
-                      onChange={(e) => setMonthlyVolume(e.target.value)}
-                      className="w-full rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] px-3.5 py-2.5 text-sm text-[#0F172A] font-mono focus:border-[#059669] focus:bg-white focus:outline-none"
+                      id="enquiryType"
+                      required
+                      value={enquiryType}
+                      onChange={(e) => setEnquiryType(e.target.value)}
+                      className="w-full rounded-lg border border-[#E2E8F0] bg-white px-3 py-2.5 text-sm text-[#0F172A] focus:border-[#059669] focus:outline-none focus:ring-1 focus:ring-[#059669]"
                     >
-                      <option value="10,000 to 50,000 SCM / Month">
-                        10,000 to 50,000 SCM / Month (Commercial / Estate / Fleet)
-                      </option>
-                      <option value="50,000 to 150,000 SCM / Month">
-                        50,000 to 150,000 SCM / Month (Mid-Scale Industrial / 1 to 3 MW)
-                      </option>
-                      <option value="150,000 to 500,000 SCM / Month">
-                        150,000 to 500,000 SCM / Month (Heavy Industrial / 3 to 10 MW)
-                      </option>
-                      <option value="500,000+ SCM / Month (Bulk Cryogenic LNG)">
-                        500,000+ SCM / Month (Bulk Cryogenic LNG / 10+ MW Plant)
-                      </option>
+                      {ENQUIRY_TYPES.map((type) => (
+                        <option key={type} value={type}>
+                          {type}
+                        </option>
+                      ))}
                     </select>
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="block text-xs font-semibold text-[#0F172A]">
-                      Project Technical Specifications / Generator Ratings
+                    <label
+                      htmlFor="message"
+                      className="block text-xs font-semibold text-[#0F172A]"
+                    >
+                      Message
                     </label>
                     <textarea
-                      rows={3}
+                      id="message"
+                      rows={4}
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
-                      placeholder="Share your current diesel consumption (Litres/month), generator kVA/MW ratings, boiler capacities, or fleet size..."
-                      className="w-full rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] px-3.5 py-2.5 text-sm text-[#0F172A] focus:border-[#059669] focus:bg-white focus:outline-none"
+                      placeholder="Outline your mandate, ticket size or technical scope and we will route it appropriately."
+                      className="w-full rounded-lg border border-[#E2E8F0] bg-white px-3 py-2.5 text-sm text-[#0F172A] focus:border-[#059669] focus:outline-none focus:ring-1 focus:ring-[#059669]"
                     />
                   </div>
 
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
-                    <div className="text-xs text-[#475569] space-y-0.5">
-                      <p>
-                        Direct Line:{' '}
-                        <a
-                          href={COMPANY_INFO.phoneHref}
-                          className="font-mono font-bold text-[#0F172A] hover:text-[#059669]"
-                        >
-                          {COMPANY_INFO.phoneDisplay}
-                        </a>
-                      </p>
-                      <p>
-                        Email:{' '}
-                        <a
-                          href={COMPANY_INFO.emailHref}
-                          className="font-mono font-semibold text-[#0284C7] hover:underline"
-                        >
-                          {COMPANY_INFO.emailDisplay}
-                        </a>
-                      </p>
-                    </div>
-
-                    <Button type="submit" size="lg">
+                  <div className="flex flex-col gap-3 border-t border-[#E2E8F0] pt-5 sm:flex-row sm:items-center sm:justify-between">
+                    <p className="flex items-start gap-2 text-[11px] leading-relaxed text-[#475569]">
+                      <Building2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#059669]" />
+                      Your details are used solely to respond to this enquiry.
+                    </p>
+                    <Button type="submit" className="w-full shrink-0 sm:w-auto">
                       <Send className="h-4 w-4" />
-                      <span className="sm:hidden">Submit Inquiry</span>
-                      <span className="hidden sm:inline">Submit Supply Inquiry</span>
+                      Submit Enquiry
                     </Button>
                   </div>
-                </motion.form>
+                </form>
               )}
-            </AnimatePresence>
+            </div>
           </motion.div>
         </div>
       </div>

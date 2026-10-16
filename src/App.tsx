@@ -1,49 +1,55 @@
 import { useState } from 'react'
 import { Navbar } from './components/Navbar'
 import { HeroSection } from './components/HeroSection'
-import { BentoSolutionsSection } from './components/BentoSolutionsSection'
-import { RoiCalculatorSection } from './components/RoiCalculatorSection'
-import { AbujaCorridorSection } from './components/AbujaCorridorSection'
-import { SafetyAndFaqSection } from './components/SafetyAndFaqSection'
+import { WhoWeAreSection } from './components/WhoWeAreSection'
+import { StrategySection } from './components/StrategySection'
+import { GwagwaladaSection } from './components/GwagwaladaSection'
+import { MonetizationModelSection } from './components/MonetizationModelSection'
+import { WhyApexSection } from './components/WhyApexSection'
+import { InvestSection } from './components/InvestSection'
+import { InvestorFaqSection } from './components/InvestorFaqSection'
 import { ContactSection } from './components/ContactSection'
 import { Footer } from './components/Footer'
-import { QuoteModal } from './components/QuoteModal'
+import { InvestorModal } from './components/InvestorModal'
 import { MobileActionBar } from './components/MobileActionBar'
 
 export function App() {
-  const [quoteModalOpen, setQuoteModalOpen] = useState(false)
-  const [quotePresetNote, setQuotePresetNote] = useState(
-    'Free Fuel Audit & CNG/LNG Gas Supply Quote'
+  const [investorModalOpen, setInvestorModalOpen] = useState(false)
+  const [enquiryPresetNote, setEnquiryPresetNote] = useState(
+    'Investor Data Room & Mandate Enquiry — Gwagwalada Energy Hub'
   )
 
-  const handleOpenQuote = (presetNote?: string) => {
+  const handleOpenInvestor = (presetNote?: string) => {
     if (presetNote) {
-      setQuotePresetNote(presetNote)
+      setEnquiryPresetNote(presetNote)
     }
-    setQuoteModalOpen(true)
+    setInvestorModalOpen(true)
   }
 
   return (
-    <div className="min-h-screen flex flex-col overflow-x-clip bg-[#F8FAFC] pb-[calc(4.25rem+env(safe-area-inset-bottom))] text-[#0F172A] lg:pb-0">
-      <Navbar onOpenQuote={handleOpenQuote} />
+    <div className="flex min-h-screen flex-col overflow-x-clip bg-[#F8FAFC] pb-[calc(4.25rem+env(safe-area-inset-bottom))] text-[#0F172A] lg:pb-0">
+      <Navbar onOpenInvestor={handleOpenInvestor} />
 
       <main className="flex-1">
-        <HeroSection onOpenQuote={handleOpenQuote} />
-        <BentoSolutionsSection onOpenQuote={handleOpenQuote} />
-        <RoiCalculatorSection onOpenQuote={handleOpenQuote} />
-        <AbujaCorridorSection onOpenQuote={handleOpenQuote} />
-        <SafetyAndFaqSection />
+        <HeroSection onOpenInvestor={handleOpenInvestor} />
+        <WhoWeAreSection />
+        <StrategySection />
+        <GwagwaladaSection />
+        <MonetizationModelSection />
+        <WhyApexSection />
+        <InvestSection onOpenInvestor={handleOpenInvestor} />
+        <InvestorFaqSection />
         <ContactSection />
       </main>
 
-      <Footer onOpenQuote={handleOpenQuote} />
-      <MobileActionBar onOpenQuote={handleOpenQuote} />
+      <Footer onOpenInvestor={handleOpenInvestor} />
+      <MobileActionBar onOpenInvestor={handleOpenInvestor} />
 
-      <QuoteModal
-        key={`${quoteModalOpen}-${quotePresetNote}`}
-        open={quoteModalOpen}
-        onOpenChange={setQuoteModalOpen}
-        presetNote={quotePresetNote}
+      <InvestorModal
+        key={`${investorModalOpen}-${enquiryPresetNote}`}
+        open={investorModalOpen}
+        onOpenChange={setInvestorModalOpen}
+        presetNote={enquiryPresetNote}
       />
     </div>
   )
