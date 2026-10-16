@@ -1,209 +1,196 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import {
-  ArrowRight,
-  Calculator,
-  Check,
-} from 'lucide-react'
-import { COMPANY_INFO, TRUST_BENCHMARKS } from '../data/energyData'
+import { ArrowRight, FileText, TrendingUp } from 'lucide-react'
+import { COMPANY_INFO, HERO_METRICS, RAISE } from '../data/companyData'
 import {
   fadeUpVariant,
   scaleFadeVariant,
   staggerContainerVariant,
-  EASE_OUT_EXPO,
 } from '../lib/motion'
 import { Button } from './ui/button'
 
 interface HeroSectionProps {
-  onOpenQuote: (presetNote?: string) => void
+  onOpenInvestor: (presetNote?: string) => void
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenQuote }) => {
+export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenInvestor }) => {
   return (
     <section className="relative overflow-hidden border-b border-[#E2E8F0] bg-[#F8FAFC] pb-14 pt-10 sm:pb-16 sm:pt-14 lg:pb-24 lg:pt-20">
       <div className="mx-auto max-w-[1320px] space-y-12 px-4 sm:space-y-16 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 items-center gap-10 sm:gap-12 lg:grid-cols-12">
-          {/* Left 7 Columns: Staggered Editorial Typography & Conversion Actions */}
+          {/* Left 7 Columns: Positioning, Tagline & Investor Actions */}
           <motion.div
             variants={staggerContainerVariant}
             initial="hidden"
             animate="visible"
             className="space-y-6 lg:col-span-7 lg:space-y-7"
           >
-            {/* Swiss Monospace Eyebrow */}
             <motion.div
               variants={fadeUpVariant}
               className="flex items-start gap-2.5 font-mono text-[10px] font-semibold uppercase leading-relaxed tracking-[0.12em] text-[#059669] sm:items-center sm:text-xs sm:tracking-[0.14em]"
             >
               <span className="mt-1 h-2 w-2 shrink-0 bg-[#059669] sm:mt-0" />
-              <span>MIDSTREAM &amp; DOWNSTREAM GAS INFRASTRUCTURE • NIGERIA</span>
+              <span>
+                100% NIGERIAN • GAS COMMERCIALIZATION • DECADE OF GAS
+              </span>
             </motion.div>
 
             <motion.h1
               variants={fadeUpVariant}
-              className="font-display text-[2rem] font-bold leading-[1.08] tracking-tight text-[#0F172A] min-[380px]:text-4xl sm:text-5xl lg:text-[58px] lg:leading-[1.05]"
+              className="font-display text-[2rem] font-bold leading-[1.08] tracking-tight text-[#0F172A] min-[380px]:text-4xl sm:text-5xl lg:text-[56px] lg:leading-[1.05]"
             >
-              Cut Industrial &amp; Fleet Fuel Costs by{' '}
-              <span className="text-[#059669]">58%</span> with Clean{' '}
-              <span className="text-[#059669]">CNG</span> &amp;{' '}
-              <span className="text-[#0284C7]">LNG</span>.
+              From Pilot to{' '}
+              <span className="text-[#059669]">World-Scale</span>: Monetizing
+              Nigeria&apos;s Gas, Powering the World.
             </motion.h1>
 
             <motion.p
               variants={fadeUpVariant}
               className="max-w-2xl text-[15px] leading-relaxed text-[#475569] sm:text-lg"
             >
-              <strong>{COMPANY_INFO.name}</strong> engineers and operates
-              250-bar Compressed Natural Gas cascades, -162°C Cryogenic LNG
-              storage, turnkey Virtual Pipeline skids, and commercial fleet
-              refueling systems for manufacturers, captive power plants,
-              estates, and logistics operators across Nigeria.
+              <strong className="text-[#0F172A]">{COMPANY_INFO.name}</strong> is
+              a 100% Nigerian energy development company accelerating the
+              Federal Government&apos;s{' '}
+              <strong className="text-[#0F172A]">Decade of Gas</strong>{' '}
+              Initiative. We develop phased gas projects starting with
+              fast-to-market CNG and Mini-LNG, scaling to a World-Scale{' '}
+              <strong className="text-[#0F172A]">12 MTPA LNG</strong> company.
             </motion.p>
 
-            {/* Primary Conversion Actions */}
+            {/* Strategy Chain */}
             <motion.div
               variants={fadeUpVariant}
-              className="flex flex-col items-stretch gap-3 pt-1 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3.5"
+              className="flex flex-wrap items-center gap-x-2.5 gap-y-2 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#0F172A] sm:text-xs"
+            >
+              <span className="rounded-md border border-[#059669]/30 bg-[#059669]/10 px-2.5 py-1 text-[#047857]">
+                Prove
+              </span>
+              <ArrowRight className="h-3.5 w-3.5 text-[#94A3B8]" />
+              <span className="rounded-md border border-[#0284C7]/30 bg-[#0284C7]/10 px-2.5 py-1 text-[#0369A1]">
+                Scale
+              </span>
+              <ArrowRight className="h-3.5 w-3.5 text-[#94A3B8]" />
+              <span className="rounded-md border border-[#D97706]/30 bg-[#D97706]/10 px-2.5 py-1 text-[#B45309]">
+                Dominate
+              </span>
+            </motion.div>
+
+            <motion.div
+              variants={fadeUpVariant}
+              className="flex flex-col items-stretch gap-3 pt-1 sm:flex-row sm:items-center"
             >
               <Button
                 size="lg"
                 onClick={() =>
-                  onOpenQuote(
-                    'Hero CTA: Request Free Site Energy Audit & Gas Supply Proposal'
+                  onOpenInvestor(
+                    'Request: Investor Data Room Access — Gwagwalada Energy Hub'
                   )
                 }
               >
-                <span className="sm:hidden">Free Energy Audit</span>
-                <span className="hidden sm:inline">Schedule Free Energy Audit</span>
-                <ArrowRight className="h-4 w-4" />
+                <FileText className="h-4 w-4" />
+                Request Investor Data Room
               </Button>
-
-              <Button variant="dark" size="lg" asChild>
-                <a href="#calculator">
-                  <Calculator className="h-4 w-4 text-[#34D399]" />
-                  <span className="sm:hidden">Calculate Savings</span>
-                  <span className="hidden sm:inline">Calculate Your Savings</span>
+              <Button size="lg" variant="outline" asChild>
+                <a href="#strategy">
+                  <TrendingUp className="h-4 w-4 text-[#059669]" />
+                  View the Phased Strategy
                 </a>
               </Button>
-
-              {/* <a
-                href={COMPANY_INFO.phoneHref}
-                className="inline-flex h-12 items-center gap-2.5 rounded-xl border border-[#E2E8F0] bg-white px-5 text-sm font-semibold text-[#0F172A] hover:border-[#059669] transition-colors"
-              >
-                <PhoneCall className="h-4 w-4 text-[#059669]" />
-                <span className="font-mono tabular-nums">
-                  {COMPANY_INFO.phoneDisplay}
-                </span>
-              </a> */}
             </motion.div>
 
-            {/* Clean Architectural Verification Row */}
+            {/* Live Raise Strip */}
             <motion.div
               variants={fadeUpVariant}
-              className="grid grid-cols-1 gap-3 pt-3 sm:grid-cols-3 border-t border-[#E2E8F0] text-xs font-medium text-[#475569]"
+              className="flex flex-col gap-3 rounded-xl border border-[#E2E8F0] bg-white p-4 sm:flex-row sm:items-center sm:justify-between"
             >
-              <div className="flex items-center gap-2">
-                <Check className="h-4 w-4 text-[#059669] shrink-0" />
-                <span>Zero-CapEx Skid Options (BOOT)</span>
+              <div className="flex items-start gap-3">
+                <span className="mt-1.5 flex h-2 w-2 shrink-0 rounded-full bg-[#059669] animate-pulse-glow" />
+                <div>
+                  <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[#059669]">
+                    CURRENTLY RAISING
+                  </p>
+                  <p className="mt-1 text-sm font-semibold text-[#0F172A]">
+                    {RAISE.mandate.amount} OE Mandate{' '}
+                    <span className="font-normal text-[#475569]">
+                      + {RAISE.next.amount} Equity / Debt
+                    </span>
+                  </p>
+                </div>
               </div>
-              <div className="flex items-center gap-2">
-                <Check className="h-4 w-4 text-[#059669] shrink-0" />
-                <span>Nationwide Virtual Pipeline Delivery</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Check className="h-4 w-4 text-[#059669] shrink-0" />
-                <span>NMDPRA &amp; SON ISO 11439 Certified</span>
-              </div>
+              <a
+                href="#invest"
+                className="inline-flex min-h-11 items-center gap-1.5 self-start rounded-lg px-3 font-mono text-xs font-semibold text-[#059669] transition-colors hover:bg-[#059669]/10 sm:self-auto"
+              >
+                THE INVESTMENT CASE
+                <ArrowRight className="h-3.5 w-3.5" />
+              </a>
             </motion.div>
           </motion.div>
 
-          {/* Right 5 Columns: Clean Architectural Visual Frame */}
+          {/* Right 5 Columns: Flagship Project Imagery */}
           <motion.div
             variants={scaleFadeVariant}
             initial="hidden"
             animate="visible"
             className="lg:col-span-5"
           >
-            <div className="overflow-hidden rounded-2xl border border-[#E2E8F0] bg-[#0B131E] shadow-xl">
-              {/* Top Minimal Telemetry Header */}
-              <div className="flex items-center justify-between gap-3 border-b border-slate-800 px-4 py-3 font-mono text-[10px] text-slate-300 sm:px-5 sm:py-3.5 sm:text-[11px]">
-                <div className="flex min-w-0 items-center gap-2">
-                  <span className="h-2 w-2 shrink-0 rounded-full bg-[#10B981]" />
-                  <span className="truncate font-semibold uppercase tracking-wider text-white">
-                    <span className="sm:hidden">CNG / LNG SYSTEM</span>
-                    <span className="hidden sm:inline">CRYOGENIC LNG &amp; CNG COMPRESSION TRAIN</span>
+            <div className="overflow-hidden rounded-2xl border border-[#E2E8F0] bg-white shadow-sm">
+              <div className="relative aspect-[4/3] w-full overflow-hidden">
+                <img
+                  src="/images/gwagwalada-site.jpg"
+                  alt="ApexEnergy Gwagwalada Energy Hub: cryogenic LNG storage tanks, gas compression skids and CNG cascade trailers on the AKK pipeline corridor in the Federal Capital Territory"
+                  className="h-full w-full object-cover"
+                  loading="eager"
+                />
+                <div className="absolute left-3 top-3 flex items-center gap-2 rounded-md bg-[#0B131E]/90 px-2.5 py-1.5 backdrop-blur-sm">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#10B981] animate-pulse-glow" />
+                  <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-white">
+                    Flagship — Phase 1
                   </span>
                 </div>
-                <span className="shrink-0 text-[#34D399]">24/7 SCADA</span>
               </div>
-
-              {/* Facility Photograph with Subtle Hover Scale */}
-              <div className="relative aspect-[4/3] w-full overflow-hidden">
-                <motion.img
-                  whileHover={{ scale: 1.03 }}
-                  transition={{ duration: 0.6, ease: EASE_OUT_EXPO }}
-                  src="/images/hero-facility.jpg"
-                  alt="Apex Energy Resources Limited Cryogenic LNG Storage and High-Pressure CNG Compression Facility"
-                  fetchPriority="high"
-                  decoding="async"
-                  className="h-full w-full object-cover object-center"
-                />
-              </div>
-
-              {/* Structured Bottom Ledger with 1px Hairline Dividers */}
-              <div className="grid grid-cols-3 divide-x divide-slate-800 border-t border-slate-800 bg-[#0B131E] text-white">
-                <div className="min-w-0 p-3 sm:p-4">
-                  <p className="font-mono text-[9px] uppercase leading-tight tracking-wider text-slate-400 sm:text-[10px]">
-                    CNG PRESSURE
-                  </p>
-                  <p className="mt-1 whitespace-nowrap font-mono text-sm font-bold text-[#34D399] tabular-nums sm:text-base">
-                    250 Bar
-                  </p>
-                </div>
-                <div className="min-w-0 p-3 sm:p-4">
-                  <p className="font-mono text-[9px] uppercase leading-tight tracking-wider text-slate-400 sm:text-[10px]">
-                    LNG CRYO STATE
-                  </p>
-                  <p className="mt-1 whitespace-nowrap font-mono text-sm font-bold text-[#7DD3FC] tabular-nums sm:text-base">
-                    -162°C
-                  </p>
-                </div>
-                <div className="min-w-0 p-3 sm:p-4">
-                  <p className="font-mono text-[9px] uppercase leading-tight tracking-wider text-slate-400 sm:text-[10px]">
-                    BENCHMARK
-                  </p>
-                  <p className="mt-1 whitespace-nowrap font-mono text-sm font-bold text-white tabular-nums sm:text-base">
-                    ₦320/SCM
-                  </p>
-                </div>
+              <div className="space-y-2 border-t border-[#E2E8F0] p-4">
+                <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[#059669]">
+                  GWAGWALADA ENERGY HUB • FCT
+                </p>
+                <p className="font-display text-lg font-bold leading-tight text-[#0F172A]">
+                  5 MMSCFD CNG + 50 TPD Mini-LNG
+                </p>
+                <p className="text-xs leading-relaxed text-[#475569]">
+                  Sited on the AKK pipeline corridor. First gas targeted in 18
+                  months — and $27M per year of FX savings once operating.
+                </p>
               </div>
             </div>
           </motion.div>
         </div>
 
-        {/* Exposed Hairline Swiss-Grid Key Metrics Ledger */}
+        {/* Benchmark Metrics Band */}
         <motion.div
           variants={staggerContainerVariant}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: '-40px' }}
-          aria-label="Apex Energy performance benchmarks"
-          tabIndex={0}
-          className="mobile-scroll-row flex snap-x snap-mandatory divide-x divide-[#E2E8F0] overflow-x-auto rounded-2xl border border-[#E2E8F0] bg-white pb-1 sm:grid sm:grid-cols-2 sm:divide-x-0 sm:overflow-visible sm:pb-0 lg:grid-cols-4 lg:divide-x"
+          viewport={{ once: true, margin: '-60px' }}
+          className="grid grid-cols-1 gap-4 border-t border-[#E2E8F0] pt-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6"
         >
-          {TRUST_BENCHMARKS.map((item) => (
+          {HERO_METRICS.map((metric) => (
             <motion.div
-              key={item.label}
+              key={metric.label}
               variants={fadeUpVariant}
-              className="min-w-[78vw] snap-start p-6 sm:min-w-0 sm:p-7"
+              className="border-l-2 border-[#059669] pl-4"
             >
-              <p className="font-mono text-3xl sm:text-4xl font-bold tracking-tight text-[#0F172A] tabular-nums">
-                {item.metric}
+              <p className="font-display text-3xl font-bold leading-none tracking-tight text-[#0F172A] tabular-nums sm:text-4xl">
+                {metric.value}
+                <span className="ml-1 font-mono text-xs font-semibold uppercase tracking-[0.1em] text-[#059669]">
+                  {metric.unit}
+                </span>
               </p>
-              <p className="mt-2 font-display text-sm font-bold text-[#0F172A]">
-                {item.label}
+              <p className="mt-2 text-sm font-semibold text-[#0F172A]">
+                {metric.label}
               </p>
-              <p className="mt-0.5 text-xs text-[#475569]">{item.sub}</p>
+              <p className="mt-1 text-xs leading-relaxed text-[#475569]">
+                {metric.sub}
+              </p>
             </motion.div>
           ))}
         </motion.div>

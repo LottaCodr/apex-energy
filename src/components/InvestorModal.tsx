@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { CheckCircle2, Flame, Mail, Phone, Send } from 'lucide-react'
-import { COMPANY_INFO } from '../data/energyData'
+import { CheckCircle2, Flame, Mail, Phone, Send, Lock } from 'lucide-react'
+import { COMPANY_INFO } from '../data/companyData'
 import { Button } from './ui/button'
 import {
   Dialog,
@@ -10,28 +10,39 @@ import {
   DialogTitle,
 } from './ui/dialog'
 
-interface QuoteModalProps {
+interface InvestorModalProps {
   open: boolean
   onOpenChange: (open: boolean) => void
   presetNote: string
 }
 
-export const QuoteModal: React.FC<QuoteModalProps> = ({
+const PARTY_TYPES = [
+  'Investor — Equity',
+  'Investor — Debt / Lending',
+  'Owner Engineer (OE) Mandate',
+  'Development Finance / Grant',
+  'Strategic / Offtake Partner',
+  'EPC or Equipment Supplier',
+  'Government / Regulatory',
+]
+
+export const InvestorModal: React.FC<InvestorModalProps> = ({
   open,
   onOpenChange,
   presetNote,
 }) => {
   const [name, setName] = useState('')
   const [organization, setOrganization] = useState('')
-  const [phone, setPhone] = useState('')
+  const [partyType, setPartyType] = useState(PARTY_TYPES[0])
   const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
   const [notes, setNotes] = useState(presetNote)
   const [ticketId, setTicketId] = useState<string | null>(null)
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     const num = Math.floor(100000 + Math.random() * 900000)
-    setTicketId(`APEX-NG-${num}`)
+    setTicketId(`APEX-IR-${num}`)
   }
 
   return (
@@ -39,40 +50,48 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
       <DialogContent className="max-w-xl">
         <DialogHeader className="pr-9 sm:pr-10">
           <DialogTitle className="flex items-start gap-2">
-            <Flame className="h-5 w-5 text-[#059669]" />
-            <span>Request Gas Off-Take &amp; Engineering Proposal</span>
+            <Flame className="h-5 w-5 shrink-0 text-[#059669]" />
+            <span>Investor Data Room &amp; Mandate Enquiry</span>
           </DialogTitle>
           <DialogDescription>
-            {COMPANY_INFO.name} • Nationwide CNG &amp; LNG Supply ({COMPANY_INFO.phoneDisplay} |{' '}
-            {COMPANY_INFO.emailDisplay})
+            {COMPANY_INFO.name} • {COMPANY_INFO.positioning} (
+            {COMPANY_INFO.phoneDisplay} | {COMPANY_INFO.emailDisplay})
           </DialogDescription>
         </DialogHeader>
 
         {ticketId ? (
-          <div className="py-6 space-y-5 text-center">
+          <div className="space-y-5 py-6 text-center">
             <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-xl bg-[#059669]/10 text-[#059669]">
               <CheckCircle2 className="h-8 w-8" />
             </div>
             <div className="space-y-1.5">
               <p className="font-mono text-xs font-bold text-[#059669]">
-                PROPOSAL REQUEST ID: {ticketId}
+                ENQUIRY REFERENCE: {ticketId}
               </p>
               <h4 className="font-display text-xl font-bold text-[#0F172A]">
-                Assigned to Gas Engineering Desk
+                Routed to the Investment Desk
               </h4>
               <p className="text-sm text-[#475569]">
-                Thank you, <strong>{name}</strong> ({organization}). Our commercial
-                off-take team will contact you shortly.
+                Thank you, <strong>{name}</strong> ({organization}). Your{' '}
+                {partyType.toLowerCase()} enquiry has been logged. The investment
+                desk responds within one business day.
               </p>
             </div>
 
-            <div className="rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] p-4 text-left font-mono text-xs space-y-1.5">
-              <p className="text-[#0F172A] font-semibold">Direct Priority Channels:</p>
+            <div className="space-y-2 rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] p-4 text-left font-mono text-xs">
+              <p className="flex items-center gap-2 font-semibold text-[#0F172A]">
+                <Lock className="h-3.5 w-3.5 text-[#059669]" />
+                Data room access is granted under NDA:
+              </p>
               <p className="text-[#475569]">
-                Phone:{' '}
+                Includes FEED scope, feedstock position, permit status, capital
+                structure and the phased programme financial model.
+              </p>
+              <p className="pt-1 text-[#475569]">
+                Direct line:{' '}
                 <a
                   href={COMPANY_INFO.phoneHref}
-                  className="text-[#059669] font-bold"
+                  className="font-bold text-[#059669] tabular-nums"
                 >
                   {COMPANY_INFO.phoneDisplay}
                 </a>
@@ -88,16 +107,14 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
               </p>
             </div>
 
-            <div className="flex justify-center gap-3">
-              <Button onClick={() => onOpenChange(false)}>Done</Button>
-            </div>
+            <Button onClick={() => onOpenChange(false)}>Done</Button>
           </div>
         ) : (
           <form onSubmit={handleFormSubmit} className="space-y-4 pt-2">
             <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
               <div className="space-y-1">
                 <label className="block text-xs font-semibold text-[#0F172A]">
-                  Your Name *
+                  Full Name *
                 </label>
                 <input
                   type="text"
@@ -112,7 +129,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
 
               <div className="space-y-1">
                 <label className="block text-xs font-semibold text-[#0F172A]">
-                  Organization / Company *
+                  Organization / Institution *
                 </label>
                 <input
                   type="text"
@@ -120,14 +137,48 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                   autoComplete="organization"
                   value={organization}
                   onChange={(e) => setOrganization(e.target.value)}
-                  placeholder="Continental Industrial PLC"
+                  placeholder="Development Finance Institution"
+                  className="w-full rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] px-3 py-2 text-sm text-[#0F172A] focus:border-[#059669] focus:bg-white focus:outline-none"
+                />
+              </div>
+
+              <div className="space-y-1 sm:col-span-2">
+                <label className="block text-xs font-semibold text-[#0F172A]">
+                  Party Type *
+                </label>
+                <select
+                  required
+                  value={partyType}
+                  onChange={(e) => setPartyType(e.target.value)}
+                  className="w-full rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] px-3 py-2 text-sm text-[#0F172A] focus:border-[#059669] focus:bg-white focus:outline-none"
+                >
+                  {PARTY_TYPES.map((type) => (
+                    <option key={type} value={type}>
+                      {type}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="space-y-1">
+                <label className="block text-xs font-semibold text-[#0F172A]">
+                  Business Email *
+                </label>
+                <input
+                  type="email"
+                  required
+                  autoComplete="email"
+                  inputMode="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="name@institution.com"
                   className="w-full rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] px-3 py-2 text-sm text-[#0F172A] focus:border-[#059669] focus:bg-white focus:outline-none"
                 />
               </div>
 
               <div className="space-y-1">
                 <label className="block text-xs font-semibold text-[#0F172A]">
-                  Phone Number *
+                  Telephone *
                 </label>
                 <input
                   type="tel"
@@ -137,36 +188,20 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="+234 802 000 0000"
-                  className="w-full rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] px-3 py-2 text-sm font-mono text-[#0F172A] focus:border-[#059669] focus:bg-white focus:outline-none"
-                />
-              </div>
-
-              <div className="space-y-1">
-                <label className="block text-xs font-semibold text-[#0F172A]">
-                  Corporate Email *
-                </label>
-                <input
-                  type="email"
-                  required
-                  autoComplete="email"
-                  inputMode="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="name@company.com"
-                  className="w-full rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] px-3 py-2 text-sm text-[#0F172A] focus:border-[#059669] focus:bg-white focus:outline-none"
+                  className="w-full rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] px-3 py-2 font-mono text-sm text-[#0F172A] focus:border-[#059669] focus:bg-white focus:outline-none"
                 />
               </div>
             </div>
 
             <div className="space-y-1">
               <label className="block text-xs font-semibold text-[#0F172A]">
-                Configuration &amp; Technical Requirements
+                Mandate, Ticket Size &amp; Requirements
               </label>
               <textarea
                 rows={3}
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
-                className="w-full rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] px-3 py-2 text-xs font-mono text-[#0F172A] focus:border-[#059669] focus:bg-white focus:outline-none"
+                className="w-full rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] px-3 py-2 font-mono text-xs text-[#0F172A] focus:border-[#059669] focus:bg-white focus:outline-none"
               />
             </div>
 
@@ -182,7 +217,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                 href={COMPANY_INFO.emailHref}
                 className="inline-flex min-w-0 items-center gap-1.5 break-all font-mono text-[#7DD3FC] hover:underline"
               >
-                <Mail className="h-3.5 w-3.5" />
+                <Mail className="h-3.5 w-3.5 shrink-0" />
                 <span>{COMPANY_INFO.emailDisplay}</span>
               </a>
             </div>
@@ -197,8 +232,10 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
               </Button>
               <Button type="submit">
                 <Send className="h-4 w-4" />
-                <span className="sm:hidden">Submit Request</span>
-                <span className="hidden sm:inline">Submit Engineering Request</span>
+                <span className="sm:hidden">Submit Enquiry</span>
+                <span className="hidden sm:inline">
+                  Submit Investor Enquiry
+                </span>
               </Button>
             </div>
           </form>

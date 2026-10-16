@@ -1,13 +1,7 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import {
-  Phone,
-  Mail,
-  Flame,
-  ArrowRight,
-  Menu,
-} from 'lucide-react'
-import { COMPANY_INFO } from '../data/energyData'
+import { Phone, Mail, Flame, ArrowRight, Menu, FileText } from 'lucide-react'
+import { COMPANY_INFO } from '../data/companyData'
 import { EASE_OUT_EXPO } from '../lib/motion'
 import { Button } from './ui/button'
 import {
@@ -20,17 +14,18 @@ import {
 } from './ui/dialog'
 
 interface NavbarProps {
-  onOpenQuote: (presetNote?: string) => void
+  onOpenInvestor: (presetNote?: string) => void
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenQuote }) => {
+export const Navbar: React.FC<NavbarProps> = ({ onOpenInvestor }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const navItems = [
-    { label: 'Solutions', href: '#solutions' },
-    { label: 'Process', href: '#how-it-works' },
-    { label: 'Calculator', href: '#calculator' },
-    { label: 'Network', href: '#network' },
+    { label: 'Company', href: '#company' },
+    { label: 'Strategy', href: '#strategy' },
+    { label: 'Gwagwalada', href: '#gwagwalada' },
+    { label: 'Edge', href: '#why' },
+    { label: 'Invest', href: '#invest' },
     { label: 'FAQ', href: '#faq' },
   ]
 
@@ -42,125 +37,126 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuote }) => {
       className="sticky top-0 z-40 w-full border-b border-[#E2E8F0] bg-[#F8FAFC]/95 backdrop-blur-xl"
     >
       <div className="mx-auto flex h-16 max-w-[1320px] items-center justify-between px-4 sm:px-6 lg:h-20 lg:px-8">
-        {/* Clean Architectural Brand Lockup: Zero Pills, Zero Location Text */}
-        <a href="#" aria-label="Apex Energy home" className="group flex min-w-0 items-center gap-2.5 sm:gap-3">
+        <a
+          href="#"
+          aria-label="ApexEnergy home"
+          className="group flex min-w-0 items-center gap-2.5 sm:gap-3"
+        >
           <motion.div
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.97 }}
             transition={{ duration: 0.2 }}
             className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#0B131E] text-white transition-colors group-hover:bg-[#059669] sm:h-10 sm:w-10"
           >
-            <Flame className="h-5 w-5 text-[#10B981] group-hover:text-white transition-colors" />
+            <Flame className="h-5 w-5 text-[#10B981] transition-colors group-hover:text-white" />
           </motion.div>
           <div className="flex flex-col">
             <span className="font-display text-base font-bold leading-none tracking-tight text-[#0F172A] sm:text-lg">
-              Apex Energy
+              ApexEnergy
             </span>
             <span className="mt-1 font-mono text-[9px] font-medium uppercase tracking-[0.13em] text-[#475569] sm:text-[10px] sm:tracking-[0.16em]">
-              Resources Limited
+              Resources Ltd
             </span>
           </div>
         </a>
 
-        {/* Clean Editorial Navigation */}
-        <nav aria-label="Primary navigation" className="hidden items-center gap-5 xl:gap-7 lg:flex">
+        {/* Desktop Navigation */}
+        <nav className="hidden items-center gap-1 lg:flex">
           {navItems.map((item) => (
-            <motion.a
+            <a
               key={item.href}
               href={item.href}
-              whileHover={{ y: -1 }}
-              transition={{ duration: 0.18 }}
-              className="text-sm font-medium text-[#475569] transition-colors hover:text-[#0F172A]"
+              className="rounded-lg px-3 py-2 text-sm font-medium text-[#475569] transition-colors hover:bg-[#F1F5F9] hover:text-[#0F172A]"
             >
               {item.label}
-            </motion.a>
+            </a>
           ))}
         </nav>
 
-        {/* Right Action Cluster */}
-        <div className="hidden items-center gap-3 xl:gap-5 lg:flex">
+        <div className="flex items-center gap-2 sm:gap-3">
           <a
             href={COMPANY_INFO.phoneHref}
-            className="inline-flex items-center gap-2 font-mono text-xs font-semibold text-[#0F172A] hover:text-[#059669] transition-colors tabular-nums"
+            className="hidden items-center gap-1.5 font-mono text-xs text-[#475569] transition-colors hover:text-[#059669] xl:flex"
           >
             <Phone className="h-3.5 w-3.5 text-[#059669]" />
-            <span>{COMPANY_INFO.phoneDisplay}</span>
+            <span className="tabular-nums">{COMPANY_INFO.phoneDisplay}</span>
           </a>
 
           <Button
+            size="sm"
+            className="hidden sm:inline-flex"
             onClick={() =>
-              onOpenQuote('Header Inquiry: Request Industrial CNG / LNG Supply Quote')
+              onOpenInvestor(
+                'Request: Investor Data Room Access — Gwagwalada Energy Hub'
+              )
             }
           >
-            <span>Request Supply</span>
-            <ArrowRight className="h-4 w-4" />
+            <FileText className="h-3.5 w-3.5" />
+            Investor Enquiry
           </Button>
-        </div>
 
-        {/* Mobile Drawer Trigger */}
-        <div className="flex lg:hidden">
+          {/* Mobile Menu */}
           <Dialog open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <DialogTrigger asChild>
               <Button
                 variant="outline"
                 size="icon"
+                className="lg:hidden"
                 aria-label="Open navigation menu"
-                aria-expanded={mobileMenuOpen}
               >
                 <Menu className="h-5 w-5" />
               </Button>
             </DialogTrigger>
-            <DialogContent className="inset-y-0 left-auto right-0 top-0 h-dvh max-h-dvh w-[min(90vw,24rem)] max-w-none translate-x-0 translate-y-0 content-start gap-5 rounded-none rounded-l-2xl p-5 pt-7 sm:p-7">
-              <DialogHeader className="pr-10">
-                <DialogTitle className="flex items-start gap-2 text-lg sm:text-xl">
-                  <Flame className="h-5 w-5 text-[#059669]" />
-                  <span>{COMPANY_INFO.name}</span>
-                </DialogTitle>
-                <DialogDescription>
-                  CNG &amp; LNG Clean Energy Infrastructure Across Nigeria
-                </DialogDescription>
+            <DialogContent className="max-w-sm">
+              <DialogHeader>
+                <DialogTitle>Navigation</DialogTitle>
+                <DialogDescription>{COMPANY_INFO.positioning}</DialogDescription>
               </DialogHeader>
 
-              <div className="mt-4 flex flex-col divide-y divide-[#E2E8F0] border-y border-[#E2E8F0]">
+              <nav className="flex flex-col gap-1 pt-2">
                 {navItems.map((item) => (
                   <a
                     key={item.href}
                     href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="flex min-h-12 items-center justify-between py-3 text-sm font-semibold text-[#0F172A] hover:text-[#059669]"
+                    className="flex min-h-12 items-center justify-between rounded-lg border border-[#E2E8F0] px-4 text-sm font-semibold text-[#0F172A] transition-colors hover:border-[#059669]/40 hover:bg-[#F8FAFC]"
                   >
-                    <span>{item.label}</span>
-                    <ArrowRight className="h-4 w-4 text-[#059669]" />
+                    {item.label}
+                    <ArrowRight className="h-4 w-4 text-[#94A3B8]" />
                   </a>
                 ))}
-              </div>
+              </nav>
 
-              <div className="mt-4 space-y-2 font-mono text-xs text-[#0F172A]">
-                <a
-                  href={COMPANY_INFO.phoneHref}
-                  className="flex min-h-11 items-center gap-2 py-1 hover:text-[#059669]"
+              <div className="space-y-2 border-t border-[#E2E8F0] pt-4">
+                <Button
+                  className="w-full"
+                  onClick={() => {
+                    setMobileMenuOpen(false)
+                    onOpenInvestor(
+                      'Request: Investor Data Room Access — Gwagwalada Energy Hub'
+                    )
+                  }}
                 >
-                  <Phone className="h-4 w-4 text-[#059669]" />
-                  <span>{COMPANY_INFO.phoneDisplay}</span>
-                </a>
-                <a
-                  href={COMPANY_INFO.emailHref}
-                  className="flex min-h-11 min-w-0 items-center gap-2 py-1 hover:text-[#0284C7]"
-                >
-                  <Mail className="h-4 w-4 text-[#0284C7]" />
-                  <span className="break-all">{COMPANY_INFO.emailDisplay}</span>
-                </a>
+                  <FileText className="h-4 w-4" />
+                  Request Investor Data Room
+                </Button>
+                <div className="flex flex-col gap-1.5 pt-1 font-mono text-xs">
+                  <a
+                    href={COMPANY_INFO.phoneHref}
+                    className="inline-flex items-center gap-2 text-[#475569]"
+                  >
+                    <Phone className="h-3.5 w-3.5 text-[#059669]" />
+                    {COMPANY_INFO.phoneDisplay}
+                  </a>
+                  <a
+                    href={COMPANY_INFO.emailHref}
+                    className="inline-flex items-center gap-2 break-all text-[#475569]"
+                  >
+                    <Mail className="h-3.5 w-3.5 text-[#059669]" />
+                    {COMPANY_INFO.emailDisplay}
+                  </a>
+                </div>
               </div>
-
-              <Button
-                onClick={() => {
-                  setMobileMenuOpen(false)
-                  onOpenQuote('Mobile Menu: Request CNG / LNG Supply Quote')
-                }}
-                className="mt-3 w-full"
-              >
-                Request Supply Quote
-              </Button>
             </DialogContent>
           </Dialog>
         </div>
