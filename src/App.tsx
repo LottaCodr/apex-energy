@@ -6,6 +6,7 @@ import { StrategySection } from './components/StrategySection'
 import { GwagwaladaSection } from './components/GwagwaladaSection'
 import { MonetizationModelSection } from './components/MonetizationModelSection'
 import { WhyApexSection } from './components/WhyApexSection'
+import { ManagementSection } from './components/ManagementSection'
 import { InvestSection } from './components/InvestSection'
 import { InvestorFaqSection } from './components/InvestorFaqSection'
 import { ContactSection } from './components/ContactSection'
@@ -37,6 +38,7 @@ export function App() {
         <GwagwaladaSection />
         <MonetizationModelSection />
         <WhyApexSection />
+        <ManagementSection />
         <InvestSection onOpenInvestor={handleOpenInvestor} />
         <InvestorFaqSection />
         <ContactSection />

@@ -102,6 +102,11 @@ export const Footer: React.FC<FooterProps> = ({ onOpenInvestor }) => {
                   Why ApexEnergy Wins
                 </a>
               </li>
+              <li>
+                <a href="#leadership" className="transition-colors hover:text-white">
+                  Leadership — Adam Umar, 35 Years
+                </a>
+              </li>
             </ul>
           </div>
 

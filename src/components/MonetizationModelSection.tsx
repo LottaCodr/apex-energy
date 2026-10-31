@@ -129,7 +129,7 @@ export const MonetizationModelSection: React.FC = () => {
         >
           <div className="space-y-3 lg:col-span-7">
             <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-[#34D399]">
-              05 / PHASE 1 MONETIZATION MODEL
+              04 / PHASE 1 MONETIZATION MODEL
             </p>
             <h2 className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
               What the Gwagwalada Hub Earns

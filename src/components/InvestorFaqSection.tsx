@@ -28,7 +28,7 @@ export const InvestorFaqSection: React.FC = () => {
           >
             <div className="space-y-3">
               <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-[#059669]">
-                07 / INVESTOR QUESTIONS
+                08 / INVESTOR QUESTIONS
               </p>
               <h2 className="font-display text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
                 The Questions Every Investor Asks First

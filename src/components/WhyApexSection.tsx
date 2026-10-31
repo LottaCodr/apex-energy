@@ -40,7 +40,7 @@ export const WhyApexSection: React.FC = () => {
         >
           <div className="space-y-3 lg:col-span-7">
             <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-[#059669]">
-              04 / WHY APEXENERGY WINS
+              05 / WHY APEXENERGY WINS
             </p>
             <h2 className="font-display text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
               Five Structural Advantages, Not Five Talking Points
