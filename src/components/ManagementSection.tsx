@@ -125,7 +125,7 @@ export const ManagementSection: React.FC = () => {
             { icon: Award, label: 'Tenure', value: '35 years', sub: 'Meritorious service' },
             { icon: Building2, label: 'Final Appointment', value: 'MD, NNPC LNG Ltd', sub: 'NNPCL subsidiary' },
             { icon: Compass, label: 'Value Chain', value: 'Upstream → Mid → Down', sub: 'All 3 sectors' },
-            { icon: Fuel, label: 'Current Vehicle', value: 'ZEEMAN DMCC', sub: 'Founder & CEO, est. 2022' },
+            { icon: Fuel, label: 'Company', value: 'ApexEnergy', sub: 'Founder, ApexEnergy Resources Ltd' },
             { icon: GraduationCap, label: 'Standing', value: 'MBA • FIBD', sub: 'Fellow, NBD' },
           ].map((item) => (
             <motion.div
@@ -221,7 +221,7 @@ export const ManagementSection: React.FC = () => {
                     <Anchor className="h-3.5 w-3.5 text-[#059669]" />
                     Current Mandate
                   </span>
-                  <span className="text-right font-mono text-xs font-bold text-[#0F172A]">CEO, ZEEMAN DMCC</span>
+                  <span className="text-right font-mono text-xs font-bold text-[#0F172A]">Founder, ApexEnergy Resources Ltd</span>
                 </div>
               </div>
 
@@ -487,7 +487,7 @@ export const ManagementSection: React.FC = () => {
                   Business Coach & Mentor
                 </span>
                 <span className="text-slate-300">•</span>
-                <span className="font-mono text-[11px] text-[#475569]">ZEEMAN DMCC — CEO since 2022</span>
+                <span className="font-mono text-[11px] text-[#475569]">Founder, ApexEnergy Resources Ltd • ZEEMAN DMCC — CEO since 2022</span>
               </div>
             </motion.div>
           </motion.div>

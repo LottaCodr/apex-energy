@@ -277,15 +277,15 @@ export const LEADERSHIP: Leader[] = [
   {
     id: 'adam-umar',
     name: 'Adam Umar',
-    role: 'Energy Expert & Management and Leadership Consultant',
-    roleDetail: 'Founder & Chief Executive Officer, ZEEMAN DMCC (Est. 2022)',
+    role: 'Founder, ApexEnergy Resources Ltd',
+    roleDetail: 'Energy Expert & Management and Leadership Consultant • Retired MD, NNPC LNG Limited • Founder & CEO, ZEEMAN DMCC (Est. 2022)',
     tenure: '35 years',
-    tenureLabel: 'Meritorious service — retired MD, NNPC LNG Limited',
+    tenureLabel: 'Founder, ApexEnergy — retired MD, NNPC LNG Limited',
     initials: 'AU',
     oneLiner:
-      'Thirty-five years across upstream, midstream and downstream — culminating as Managing Director of NNPC LNG Limited, the NNPCL subsidiary that governs Nigeria\u2019s LNG interests.',
+      'Founder of ApexEnergy Resources Ltd — thirty-five years across upstream, midstream and downstream, culminating as Managing Director of NNPC LNG Limited, the NNPCL subsidiary that governs Nigeria\u2019s LNG interests.',
     bio: [
-      'Adam Umar is an Energy Expert and Management and Leadership Consultant and Founder of ZEEMAN DMCC (est. 2022), where he serves as Chief Executive Officer. He retired after 35 years of meritorious service in the Nigerian oil and gas industry, concluding his career as Managing Director of NNPC LNG Limited — the subsidiary of NNPC (now NNPCL) responsible for the nation\u2019s LNG assets and commercial interests.',
+      'Adam Umar is the Founder of ApexEnergy Resources Ltd, an Energy Expert and Management and Leadership Consultant, and the Founder of ZEEMAN DMCC (est. 2022) where he serves as Chief Executive Officer. He retired after 35 years of meritorious service in the Nigerian oil and gas industry, concluding his career as Managing Director of NNPC LNG Limited — the subsidiary of NNPC (now NNPCL) responsible for the nation\u2019s LNG assets and commercial interests.',
       'His career spans the three sectors of the value chain — Upstream, Midstream and Downstream — and the full arc of executive leadership inside the national oil company. He has held successive Executive Management and Leadership positions including General Manager Commercial, Manager Commercial Services, Manager Sales, Manager Marketing and Business Development, Manager Shipping and Manager Commercial Bunkering, among others. Each role added a layer the next phase of ApexEnergy now requires: selling molecules, moving them, financing them and governing the people who do it.',
       'He is a Business Coach and Mentor whose leadership is defined by three non-negotiables: Integrity, Honesty and Zero Tolerance for Corruption — the same governance standard on which ApexEnergy\u2019s permits, offtake and financing will be judged.',
     ],
