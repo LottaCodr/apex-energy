@@ -55,7 +55,7 @@ export const InvestorModal: React.FC<InvestorModalProps> = ({
           </DialogTitle>
           <DialogDescription>
             {COMPANY_INFO.name} • {COMPANY_INFO.positioning} (
-            {COMPANY_INFO.phoneDisplay} | {COMPANY_INFO.emailDisplay})
+            {(COMPANY_INFO.phones ?? [{ display: COMPANY_INFO.phoneDisplay }]).map((p) => p.display).join(' • ')} | {COMPANY_INFO.emailDisplay})
           </DialogDescription>
         </DialogHeader>
 
@@ -87,15 +87,14 @@ export const InvestorModal: React.FC<InvestorModalProps> = ({
                 Includes FEED scope, feedstock position, permit status, capital
                 structure and the phased programme financial model.
               </p>
-              <p className="pt-1 text-[#475569]">
-                Direct line:{' '}
-                <a
-                  href={COMPANY_INFO.phoneHref}
-                  className="font-bold text-[#059669] tabular-nums"
-                >
-                  {COMPANY_INFO.phoneDisplay}
-                </a>
-              </p>
+              <div className="space-y-1 pt-1 text-[#475569]">
+                <p>Direct lines:</p>
+                {(COMPANY_INFO.phones ?? [{ display: COMPANY_INFO.phoneDisplay, href: COMPANY_INFO.phoneHref }]).map((p) => (
+                  <a key={p.href} href={p.href} className="block font-bold text-[#059669] tabular-nums">
+                    {p.display}
+                  </a>
+                ))}
+              </div>
               <p className="break-all text-[#475569]">
                 Email:{' '}
                 <a
@@ -206,13 +205,14 @@ export const InvestorModal: React.FC<InvestorModalProps> = ({
             </div>
 
             <div className="flex flex-col items-start justify-between gap-2 rounded-xl bg-[#0B131E] p-3.5 text-xs text-slate-300 sm:flex-row sm:flex-wrap sm:items-center">
-              <a
-                href={COMPANY_INFO.phoneHref}
-                className="inline-flex items-center gap-1.5 font-mono text-[#34D399] hover:underline"
-              >
-                <Phone className="h-3.5 w-3.5" />
-                <span>{COMPANY_INFO.phoneDisplay}</span>
-              </a>
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                {(COMPANY_INFO.phones ?? [{ display: COMPANY_INFO.phoneDisplay, href: COMPANY_INFO.phoneHref }]).map((p) => (
+                  <a key={p.href} href={p.href} className="inline-flex items-center gap-1.5 font-mono text-[#34D399] hover:underline">
+                    <Phone className="h-3.5 w-3.5" />
+                    <span className="tabular-nums">{p.display}</span>
+                  </a>
+                ))}
+              </div>
               <a
                 href={COMPANY_INFO.emailHref}
                 className="inline-flex min-w-0 items-center gap-1.5 break-all font-mono text-[#7DD3FC] hover:underline"
