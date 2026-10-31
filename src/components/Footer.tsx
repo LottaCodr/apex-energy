@@ -40,15 +40,14 @@ export const Footer: React.FC<FooterProps> = ({ onOpenInvestor }) => {
             </p>
 
             <div className="space-y-2 pt-1 font-mono text-xs">
-              <div className="flex items-center gap-2.5 text-white">
-                <Phone className="h-4 w-4 text-[#10B981]" />
-                <a
-                  href={COMPANY_INFO.phoneHref}
-                  className="tabular-nums transition-colors hover:text-[#34D399]"
-                >
-                  {COMPANY_INFO.phoneDisplay}
-                </a>
-              </div>
+              {(COMPANY_INFO.phones ?? [{ display: COMPANY_INFO.phoneDisplay, href: COMPANY_INFO.phoneHref }]).map((p) => (
+                <div key={p.href} className="flex items-center gap-2.5 text-white">
+                  <Phone className="h-4 w-4 shrink-0 text-[#10B981]" />
+                  <a href={p.href} className="tabular-nums transition-colors hover:text-[#34D399]">
+                    {p.display}
+                  </a>
+                </div>
+              ))}
               <div className="flex items-center gap-2.5 text-white">
                 <Mail className="h-4 w-4 text-[#38BDF8]" />
                 <a

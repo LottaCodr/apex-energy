@@ -75,15 +75,18 @@ export const InvestorFaqSection: React.FC = () => {
                   {COMPANY_INFO.emailDisplay}
                 </span>
               </a>
-              <a
-                href={COMPANY_INFO.phoneHref}
-                className="flex items-start gap-2.5 text-xs text-white transition-colors hover:text-[#34D399]"
-              >
-                <Phone className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#10B981]" />
-                <span className="font-mono tabular-nums">
-                  {COMPANY_INFO.phoneDisplay}
-                </span>
-              </a>
+              <div className="space-y-2">
+                {(COMPANY_INFO.phones ?? [{ display: COMPANY_INFO.phoneDisplay, href: COMPANY_INFO.phoneHref }]).map((p) => (
+                  <a
+                    key={p.href}
+                    href={p.href}
+                    className="flex items-start gap-2.5 text-xs text-white transition-colors hover:text-[#34D399]"
+                  >
+                    <Phone className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#10B981]" />
+                    <span className="font-mono tabular-nums">{p.display}</span>
+                  </a>
+                ))}
+              </div>
               <p className="border-t border-slate-800 pt-3 text-[11px] leading-relaxed text-slate-400">
                 {COMPANY_INFO.operatingHours}
               </p>

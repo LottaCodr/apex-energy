@@ -99,41 +99,41 @@ export const ContactSection: React.FC = () => {
                 </p>
               </div>
 
-              {/* Phone */}
-              <div className="space-y-2 rounded-xl border border-slate-800 bg-slate-900/90 p-4">
-                <div className="flex items-center justify-between gap-3">
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-slate-400">
-                    DIRECT TELEPHONE
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      handleCopy(COMPANY_INFO.phoneDisplay, 'phone')
-                    }
-                    className="inline-flex cursor-pointer items-center gap-1 font-mono text-xs text-[#34D399] hover:underline"
-                  >
-                    {copiedField === 'phone' ? (
-                      <>
-                        <Check className="h-3.5 w-3.5" />
-                        <span>Copied</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="h-3.5 w-3.5" />
-                        <span>Copy</span>
-                      </>
-                    )}
-                  </button>
+              {/* Phones */}
+              <div className="space-y-3 rounded-xl border border-slate-800 bg-slate-900/90 p-4">
+                <span className="font-mono text-[10px] uppercase tracking-wider text-slate-400">
+                  DIRECT TELEPHONE
+                </span>
+                <div className="space-y-2.5">
+                  {(COMPANY_INFO.phones ?? [{ display: COMPANY_INFO.phoneDisplay, href: COMPANY_INFO.phoneHref }]).map((p) => (
+                    <div key={p.href} className="flex items-center justify-between gap-3">
+                      <a
+                        href={p.href}
+                        className="flex min-h-11 items-center gap-2.5 font-mono text-sm text-white transition-colors hover:text-[#34D399]"
+                      >
+                        <Phone className="h-4 w-4 shrink-0 text-[#10B981]" />
+                        <span className="tabular-nums">{p.display}</span>
+                      </a>
+                      <button
+                        type="button"
+                        onClick={() => handleCopy(p.display, p.href)}
+                        className="inline-flex shrink-0 cursor-pointer items-center gap-1 font-mono text-xs text-[#34D399] hover:underline"
+                      >
+                        {copiedField === p.href ? (
+                          <>
+                            <Check className="h-3.5 w-3.5" />
+                            <span>Copied</span>
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="h-3.5 w-3.5" />
+                            <span>Copy</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  ))}
                 </div>
-                <a
-                  href={COMPANY_INFO.phoneHref}
-                  className="flex min-h-11 items-center gap-2.5 font-mono text-sm text-white transition-colors hover:text-[#34D399]"
-                >
-                  <Phone className="h-4 w-4 text-[#10B981]" />
-                  <span className="tabular-nums">
-                    {COMPANY_INFO.phoneDisplay}
-                  </span>
-                </a>
               </div>
 
               {/* Emails */}
@@ -221,15 +221,14 @@ export const ContactSection: React.FC = () => {
                     <p className="font-semibold text-[#0F172A]">
                       Priority channels:
                     </p>
-                    <p className="text-[#475569]">
-                      Phone:{' '}
-                      <a
-                        href={COMPANY_INFO.phoneHref}
-                        className="font-bold text-[#059669]"
-                      >
-                        {COMPANY_INFO.phoneDisplay}
-                      </a>
-                    </p>
+                    <div className="space-y-1 text-[#475569]">
+                      <p>Phone:</p>
+                      {(COMPANY_INFO.phones ?? [{ display: COMPANY_INFO.phoneDisplay, href: COMPANY_INFO.phoneHref }]).map((p) => (
+                        <a key={p.href} href={p.href} className="block font-bold text-[#059669] tabular-nums">
+                          {p.display}
+                        </a>
+                      ))}
+                    </div>
                     <p className="break-all text-[#475569]">
                       Email:{' '}
                       <a

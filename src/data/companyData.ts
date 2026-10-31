@@ -10,12 +10,17 @@ export const COMPANY_INFO = {
   positioning: "Nigeria's Phased Gas Commercialization & LNG Development Company",
   tagline:
     "From Pilot to World-Scale: Monetizing Nigeria's Gas, Powering the World",
-  phoneDisplay: '+234802 211 4473',
-  phoneHref: 'tel:+2348022114473',
+  phones: [
+    { display: '+234 980 3311 6246', href: 'tel:+23498033116246' },
+    { display: '+234 802 211 4473', href: 'tel:+2348022114473' },
+  ] as const,
+  // primary / backwards-compat — first entry above
+  phoneDisplay: '+234 980 3311 6246',
+  phoneHref: 'tel:+23498033116246',
   emailDisplay: 'info@apexenergylimited.com',
   emailHref: 'mailto:info@apexenergylimited.com',
   headquarters:
-    'Plot 1142, Adetokunbo Ademola Crescent, Wuse II, Abuja, FCT, Nigeria',
+    'Yobe Investment House, 816 Ahmadu Bello Way, Central Business District, FCT Abuja, Nigeria',
   operatingHours:
     'Investor Relations — Mon to Fri (09:00 to 18:00 WAT) • Project Desk — 24/7',
 }

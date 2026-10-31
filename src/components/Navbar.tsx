@@ -142,13 +142,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInvestor }) => {
                   Request Investor Data Room
                 </Button>
                 <div className="flex flex-col gap-1.5 pt-1 font-mono text-xs">
-                  <a
-                    href={COMPANY_INFO.phoneHref}
-                    className="inline-flex items-center gap-2 text-[#475569]"
-                  >
-                    <Phone className="h-3.5 w-3.5 text-[#059669]" />
-                    {COMPANY_INFO.phoneDisplay}
-                  </a>
+                  {(COMPANY_INFO.phones ?? [{ display: COMPANY_INFO.phoneDisplay, href: COMPANY_INFO.phoneHref }]).map((p) => (
+                    <a key={p.href} href={p.href} className="inline-flex items-center gap-2 text-[#475569]">
+                      <Phone className="h-3.5 w-3.5 shrink-0 text-[#059669]" />
+                      <span className="tabular-nums">{p.display}</span>
+                    </a>
+                  ))}
                   <a
                     href={COMPANY_INFO.emailHref}
                     className="inline-flex items-center gap-2 break-all text-[#475569]"
