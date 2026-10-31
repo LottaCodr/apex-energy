@@ -1,6 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-  <rect width="64" height="64" rx="14" fill="#0B131E"/>
-  <path d="M32 10L50 48H39.5L32 31.5L24.5 48H14L32 10Z" fill="#059669"/>
-  <path d="M32 23C36.5 29.5 39 34.5 39 39.2C39 43.066 35.866 46.2 32 46.2C28.134 46.2 25 43.066 25 39.2C25 34.5 27.5 29.5 32 23Z" fill="#0284C7"/>
-  <circle cx="32" cy="40" r="3.2" fill="#F8FAFC"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" role="img" aria-label="ApexEnergy">
+  <!-- Black base -->
+  <circle cx="50" cy="50" r="48" fill="#000000"/>
+  <!-- Outer gold ring — broken at bottom where waves exit -->
+  <path d="M 50 7 A 43 43 0 1 1 13 73" stroke="#C99700" stroke-width="5.2" stroke-linecap="round" fill="none"/>
+  <path d="M 87 75 A 43 43 0 0 0 93 53" stroke="#C99700" stroke-width="5.2" stroke-linecap="round" fill="none"/>
+  <!-- Flame — main -->
+  <path d="M 48 60 C 28 48 32 26 50 10 C 60 22 68 34 62 48 C 56 58 48 60 48 60 Z" fill="#E6A700" stroke="#F2C106" stroke-width="0.6" stroke-linejoin="round"/>
+  <!-- Flame highlight -->
+  <path d="M 48 55 C 35 46 38 30 50 16 C 57 26 60 36 56 45 C 52 50 48 55 48 55 Z" fill="#FFD21A" opacity="0.95"/>
+  <!-- Flame — secondary on right -->
+  <path d="M 61 56 C 65 44 70 32 67 24 C 72 30 75 40 71 50 C 67 56 61 56 61 56 Z" fill="#D9A000" stroke="#EAB308" stroke-width="0.4" stroke-linejoin="round"/>
+  <path d="M 62 50 C 64 40 67 32 66 28 C 69 34 70 42 66 48 C 64 51 62 50 62 50 Z" fill="#FFD21A" opacity="0.92"/>
+  <!-- Blue waves — 3 ribbons -->
+  <path d="M 10 68 C 24 54 38 57 50 66 C 62 75 76 73 90 62 L 89 68 C 75 80 62 82 50 73 C 38 64 24 62 10 75 Z" fill="#004B8F"/>
+  <path d="M  8 76 C 22 64 36 66 50 74 C 62 82 74 82 88 72 L 87 78 C 73 90 61 90 50 81 C 36 72 22 71  8 83 Z" fill="#005BA8"/>
+  <path d="M  6 84 C 20 72 34 74 48 83 C 60 91 72 91 86 82 L 85 88 C 71 98 59 98 48 90 C 34 81 20 79  6 91 Z" fill="#004B8F"/>
+  <!-- Inner highlight on waves -->
+  <path d="M 12 66 C 26 54 40 57 52 66" stroke="#0A6BC2" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0.55"/>
+  <path d="M 10 74 C 24 63 38 66 52 74" stroke="#0A6BC2" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0.45"/>
 </svg>

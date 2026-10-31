@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Phone, Mail, Flame, ArrowRight, Menu, FileText } from 'lucide-react'
+import { Phone, Mail, ArrowRight, Menu, FileText } from 'lucide-react'
 import { COMPANY_INFO } from '../data/companyData'
 import { EASE_OUT_EXPO } from '../lib/motion'
 import { Button } from './ui/button'
+import { Logo } from './Logo'
 import {
   Dialog,
   DialogContent,
@@ -44,21 +45,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInvestor }) => {
           className="group flex min-w-0 items-center gap-2.5 sm:gap-3"
         >
           <motion.div
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.97 }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             transition={{ duration: 0.2 }}
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#0B131E] text-white transition-colors group-hover:bg-[#059669] sm:h-10 sm:w-10"
           >
-            <Flame className="h-5 w-5 text-[#10B981] transition-colors group-hover:text-white" />
+            <Logo variant="header" />
           </motion.div>
-          <div className="flex flex-col">
-            <span className="font-display text-base font-bold leading-none tracking-tight text-[#0F172A] sm:text-lg">
-              ApexEnergy
-            </span>
-            <span className="mt-1 font-mono text-[9px] font-medium uppercase tracking-[0.13em] text-[#475569] sm:text-[10px] sm:tracking-[0.16em]">
-              Resources Ltd
-            </span>
-          </div>
         </a>
 
         {/* Desktop Navigation */}

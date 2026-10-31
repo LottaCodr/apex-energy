@@ -1,6 +1,7 @@
 import React from 'react'
-import { Flame, Mail, MapPin, Phone, ShieldCheck } from 'lucide-react'
+import { Mail, MapPin, Phone, ShieldCheck } from 'lucide-react'
 import { COMPANY_INFO } from '../data/companyData'
+import { Logo } from './Logo'
 
 const CURRENT_YEAR = new Date().getFullYear()
 
@@ -15,19 +16,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenInvestor }) => {
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-12">
           {/* Brand & Corporate Identity */}
           <div className="space-y-4 sm:col-span-2 lg:col-span-5">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#059669] text-white">
-                <Flame className="h-5 w-5" />
-              </div>
-              <div>
-                <p className="font-display text-lg font-bold leading-none text-white">
-                  {COMPANY_INFO.name}
-                </p>
-                <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.14em] text-[#34D399]">
-                  PHASED GAS COMMERCIALIZATION &amp; LNG
-                </p>
-              </div>
-            </div>
+            <Logo variant="footer" />
 
             <p className="max-w-md text-xs leading-relaxed text-slate-400">
               {COMPANY_INFO.positioning}. Developing fast-to-market CNG and
