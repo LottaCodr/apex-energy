@@ -25,6 +25,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInvestor }) => {
     { label: 'Strategy', href: '#strategy' },
     { label: 'Gwagwalada', href: '#gwagwalada' },
     { label: 'Edge', href: '#why' },
+    { label: 'Leadership', href: '#leadership' },
     { label: 'Invest', href: '#invest' },
     { label: 'FAQ', href: '#faq' },
   ]

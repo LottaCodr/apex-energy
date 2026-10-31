@@ -45,7 +45,7 @@ export const InvestSection: React.FC<InvestSectionProps> = ({
         >
           <div className="space-y-3 lg:col-span-7">
             <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-[#34D399]">
-              06 / WHAT WE ARE RAISING NOW
+              07 / WHAT WE ARE RAISING NOW
             </p>
             <h2 className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-[42px]">
               Two Tranches Between Here and FID

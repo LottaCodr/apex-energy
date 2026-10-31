@@ -241,6 +241,88 @@ export const GWAGWALADA_MILESTONES = [
   },
 ]
 
+export const LEADERSHIP_INTRO = {
+  kicker: '06 / LEADERSHIP',
+  title: 'Thirty-Five Years of Nigerian Gas — One Career to Prove It',
+  subtitle:
+    'Investors back operators, not slideware. ApexEnergy is led by the career that built, governed and traded Nigeria\u2019s LNG at national scale.',
+  body: 'Early-stage gas companies carry key-person risk by definition. The answer is not to hide the team — it is to name the operator, show the track record in verifiable detail, and tie every credential to the specific job ahead at Gwagwalada and beyond.',
+}
+
+export interface Leader {
+  id: string
+  name: string
+  role: string
+  roleDetail: string
+  tenure: string
+  tenureLabel: string
+  initials: string
+  oneLiner: string
+  bio: string[]
+  positions: { title: string; org?: string; note?: string }[]
+  expertise: string[]
+  education: { label: string; detail: string }[]
+  quote: string
+  quoteAttribution: string
+  integrityNote: string
+  featured: boolean
+}
+
+export const LEADERSHIP: Leader[] = [
+  {
+    id: 'adam-umar',
+    name: 'Adam Umar',
+    role: 'Energy Expert & Management and Leadership Consultant',
+    roleDetail: 'Founder & Chief Executive Officer, ZEEMAN DMCC (Est. 2022)',
+    tenure: '35 years',
+    tenureLabel: 'Meritorious service — retired MD, NNPC LNG Limited',
+    initials: 'AU',
+    oneLiner:
+      'Thirty-five years across upstream, midstream and downstream — culminating as Managing Director of NNPC LNG Limited, the NNPCL subsidiary that governs Nigeria\u2019s LNG interests.',
+    bio: [
+      'Adam Umar is an Energy Expert and Management and Leadership Consultant and Founder of ZEEMAN DMCC (est. 2022), where he serves as Chief Executive Officer. He retired after 35 years of meritorious service in the Nigerian oil and gas industry, concluding his career as Managing Director of NNPC LNG Limited — the subsidiary of NNPC (now NNPCL) responsible for the nation\u2019s LNG assets and commercial interests.',
+      'His career spans the three sectors of the value chain — Upstream, Midstream and Downstream — and the full arc of executive leadership inside the national oil company. He has held successive Executive Management and Leadership positions including General Manager Commercial, Manager Commercial Services, Manager Sales, Manager Marketing and Business Development, Manager Shipping and Manager Commercial Bunkering, among others. Each role added a layer the next phase of ApexEnergy now requires: selling molecules, moving them, financing them and governing the people who do it.',
+      'He is a Business Coach and Mentor whose leadership is defined by three non-negotiables: Integrity, Honesty and Zero Tolerance for Corruption — the same governance standard on which ApexEnergy\u2019s permits, offtake and financing will be judged.',
+    ],
+    positions: [
+      { title: 'Managing Director', org: 'NNPC LNG Limited (NNPCL Subsidiary)' },
+      { title: 'General Manager Commercial', org: 'NNPC / NNPCL' },
+      { title: 'Manager Commercial Services', org: 'NNPC / NNPCL' },
+      { title: 'Manager Sales', org: 'NNPC / NNPCL' },
+      { title: 'Manager Marketing and Business Development', org: 'NNPC / NNPCL' },
+      { title: 'Manager Shipping', org: 'NNPC / NNPCL' },
+      { title: 'Manager Commercial Bunkering', org: 'NNPC / NNPCL' },
+    ],
+    expertise: [
+      'Corporate Governance',
+      'Financial Management',
+      'LNG Trading & Marketing',
+      'Asset Management',
+      'Supply & Physical Distribution of Petroleum Products',
+      'Vessel Acquisition & Management',
+      'Advanced Negotiations & Contracts Administration',
+      'Team Building & Management',
+      'Corporate Strategy & Planning',
+    ],
+    education: [
+      {
+        label: 'Master of Business Administration (MBA)',
+        detail: 'Advanced business administration with executive leadership focus',
+      },
+      {
+        label: 'Fellow, Nigerian Business Development (FIBD)',
+        detail: 'Fellowship recognising contribution to enterprise and institutional capacity',
+      },
+    ],
+    quote:
+      'A gas molecule creates no value until someone can sell it, move it, finance it and govern the people who do all three. That is what 35 years teaches you.',
+    quoteAttribution: 'Adam Umar — on why operating history matters more than concept decks',
+    integrityNote:
+      'Business Coach & Mentor • Integrity • Honesty • Zero tolerance for Corruption',
+    featured: true,
+  },
+]
+
 export const WHY_APEX = [
   {
     index: '01',
